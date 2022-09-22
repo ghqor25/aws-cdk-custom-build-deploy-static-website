@@ -1,11 +1,21 @@
 *.ts
 !*.d.ts
 
-# only used for testing
+# only for testing
 bin
 lib
 node_modules
 test
+
+# except config
+.eslintignore
+.eslintrc.json
+.prettierignore
+.prettierrc.json
+.yarnrc.yml
+cdk.json
+jest.config.js
+tsconfig.json
 
 # CDK asset staging directory
 .cdk.staging
@@ -34,3 +44,37 @@ cdk.out
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Don't include original .ts files when doing `npm pack`
+*.ts
+!*.d.ts
+coverage
+.nyc_output
+*.tgz
+
+dist
+.LAST_PACKAGE
+.LAST_BUILD
+!*.js
+
+# Include .jsii
+!.jsii
+
+lambda/test
+lambda/*.sh
+*.snk
+
+*.tsbuildinfo
+
+tsconfig.json
+.eslintrc.js
+
+jest.config.js
+# exclude cdk artifacts
+**/cdk.out
+
+junit.xml
+test/
+!*.lit.ts
+**/*.integ.snapshot
+**/*.integ.snapshot
