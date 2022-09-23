@@ -1,22 +1,3 @@
-*.ts
-!*.d.ts
-
-# only for testing
-bin
-lib
-node_modules
-test
-
-# except config
-.eslintignore
-.eslintrc.json
-.prettierignore
-.prettierrc.json
-.yarnrc.yml
-cdk.json
-jest.config.js
-tsconfig.json
-
 # CDK asset staging directory
 .cdk.staging
 cdk.out
@@ -44,6 +25,25 @@ cdk.out
 .env.development.local
 .env.test.local
 .env.production.local
+
+# only for testing
+bin
+lib
+node_modules
+test
+
+# except config
+.eslintignore
+.eslintrc.json
+.prettierignore
+.prettierrc.json
+.yarnrc.yml
+cdk.json
+jest.config.js
+tsconfig.json
+
+*.ts
+!*.d.ts
 
 # Don't include original .ts files when doing `npm pack`
 *.ts
