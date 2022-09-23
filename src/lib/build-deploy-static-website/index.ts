@@ -24,7 +24,7 @@ interface BuildDeployStaticWebsiteProps {
    /**
     * destination bucket. the build output files will be deployed to this bucket.
     */
-   readonly destinationBucket: aws_s3.Bucket;
+   readonly destinationBucket: aws_s3.IBucket;
    /**
     * The CloudFront distribution Id.
     * If this value is set, files in the distribution's edge caches will be invalidated.

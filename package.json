@@ -1,6 +1,6 @@
 {
   "name": "@songbaek/aws-cdk-build-deploy-static-website",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -9,7 +9,8 @@
   "scripts": {
     "build": "rm -rf ./dist && tsc --project tsconfig.build.json",
     "test": "jest",
-    "prepack": "yarn build"
+    "prepack": "yarn build",
+    "pub": "yarn npm publish --access public"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.104",
