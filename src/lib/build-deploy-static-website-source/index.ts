@@ -112,10 +112,10 @@ export class BuildDeployStaticWebsiteSource {
    }
 }
 
-interface CodeCommitSourceOptions
+export interface CodeCommitSourceOptions
    extends Readonly<Pick<aws_codepipeline_actions.CodeCommitSourceActionProps, 'codeBuildCloneOutput' | 'eventRole' | 'trigger'>> {}
-interface ConnectionSourceOptions
+export interface ConnectionSourceOptions
    extends Readonly<Pick<aws_codepipeline_actions.CodeStarConnectionsSourceActionProps, 'connectionArn' | 'codeBuildCloneOutput' | 'triggerOnPush'>> {}
-interface ECRSourceOptions extends Readonly<Pick<aws_codepipeline_actions.EcrSourceActionProps, 'imageTag'>> {}
-interface S3SourceOptions extends Readonly<Pick<aws_codepipeline_actions.S3SourceActionProps, 'role' | 'trigger'>> {}
-interface GitHubSourceOptions extends Readonly<Pick<aws_codepipeline_actions.GitHubSourceActionProps, 'oauthToken' | 'trigger'>> {}
+export interface ECRSourceOptions extends Readonly<Pick<aws_codepipeline_actions.EcrSourceActionProps, 'imageTag'>> {}
+export interface S3SourceOptions extends Readonly<Pick<aws_codepipeline_actions.S3SourceActionProps, 'role' | 'trigger'>> {}
+export interface GitHubSourceOptions extends Readonly<Pick<aws_codepipeline_actions.GitHubSourceActionProps, 'oauthToken' | 'trigger'>> {}

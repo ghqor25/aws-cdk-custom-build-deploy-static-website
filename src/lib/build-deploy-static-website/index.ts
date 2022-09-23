@@ -2,7 +2,7 @@ import { aws_codebuild, aws_codepipeline, aws_codepipeline_actions, aws_s3 } fro
 import { Construct } from 'constructs';
 import { CloudfrontInvalidation } from '../cloudfront-invalidation/index';
 
-interface BuildDeployStaticWebsiteProps {
+export interface BuildDeployStaticWebsiteProps {
    /**
     * input source for build. you can directly use ``` aws_codepipeline_actions.*SourceActions ```,
     * or use ``` BuildDeployStaticWebsiteSource ```, which is a simple wrapper class for easy use of SourceActions
