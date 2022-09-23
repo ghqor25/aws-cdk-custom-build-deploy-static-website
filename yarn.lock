@@ -1626,6 +1626,35 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@songbaek/aws-cdk-build-deploy-static-website@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@songbaek/aws-cdk-build-deploy-static-website@workspace:."
+  dependencies:
+    "@aws-sdk/client-cloudfront": ^3.171.0
+    "@types/aws-lambda": ^8.10.104
+    "@types/jest": ^27.5.2
+    "@types/node": 10.17.27
+    "@types/prettier": 2.6.0
+    "@typescript-eslint/eslint-plugin": ^5.38.0
+    aws-cdk: 2.40.0
+    aws-cdk-lib: 2.40.0
+    constructs: ^10.0.0
+    esbuild: ^0.15.8
+    eslint: ^8.21.0
+    eslint-config-prettier: ^8.5.0
+    eslint-import-resolver-typescript: ^3.4.1
+    eslint-plugin-jest: ^26.5.3
+    eslint-plugin-prettier: ^4.0.0
+    jest: ^27.5.1
+    prettier: ^2.7.1
+    source-map-support: ^0.5.21
+    ts-jest: ^27.1.4
+    ts-node: ^10.9.1
+    tsconfig-paths: ^4.1.0
+    typescript: 4.7.3
+  languageName: unknown
+  linkType: soft
+
 "@tootallnate/once@npm:1":
   version: 1.1.2
   resolution: "@tootallnate/once@npm:1.1.2"
@@ -2136,35 +2165,6 @@ __metadata:
   checksum: 463e2f8e43384f1afb54bc68485c436d7622acec08b6fad269b421cb1d29cebb5af751426793d0961ed243146fe4dc983402f6d5a51b720b277818dbf6f2e49e
   languageName: node
   linkType: hard
-
-"aws-cdk-custom-build-deploy-static-website@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "aws-cdk-custom-build-deploy-static-website@workspace:."
-  dependencies:
-    "@aws-sdk/client-cloudfront": ^3.171.0
-    "@types/aws-lambda": ^8.10.104
-    "@types/jest": ^27.5.2
-    "@types/node": 10.17.27
-    "@types/prettier": 2.6.0
-    "@typescript-eslint/eslint-plugin": ^5.38.0
-    aws-cdk: 2.40.0
-    aws-cdk-lib: 2.40.0
-    constructs: ^10.0.0
-    esbuild: ^0.15.8
-    eslint: ^8.21.0
-    eslint-config-prettier: ^8.5.0
-    eslint-import-resolver-typescript: ^3.4.1
-    eslint-plugin-jest: ^26.5.3
-    eslint-plugin-prettier: ^4.0.0
-    jest: ^27.5.1
-    prettier: ^2.7.1
-    source-map-support: ^0.5.21
-    ts-jest: ^27.1.4
-    ts-node: ^10.9.1
-    tsconfig-paths: ^4.1.0
-    typescript: 4.7.3
-  languageName: unknown
-  linkType: soft
 
 "aws-cdk-lib@npm:2.40.0":
   version: 2.40.0

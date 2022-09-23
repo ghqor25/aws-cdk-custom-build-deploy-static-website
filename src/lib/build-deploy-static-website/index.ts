@@ -1,6 +1,6 @@
 import { aws_codebuild, aws_codepipeline, aws_codepipeline_actions, aws_s3 } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { CloudfrontInvalidation } from './cloudfront-invalidation';
+import { CloudfrontInvalidation } from '../cloudfront-invalidation/index';
 
 interface BuildDeployStaticWebsiteProps {
    /**

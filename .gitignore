@@ -26,30 +26,14 @@ cdk.out
 .env.test.local
 .env.production.local
 
-lambda/bundle.zip
+# files
 *.js
 *.js.map
 !jest.config.js
 *.d.ts
-node_modules
-dist
 *.generated.ts
-lib/generated/resources.ts
-.jsii
-lib/*.zip
 
-.LAST_BUILD
-.nyc_output
+# folders
 coverage
-nyc.config.js
-.LAST_PACKAGE
-
-*.snk
-!.eslintrc.js
-
-!jest.config.js
-junit.xml
-!**/*.integ.snapshot/**/asset.*/*.js
-!**/*.integ.snapshot/**/asset.*/*.d.ts
-
-!**/*.integ.snapshot/**/asset.*/**
+dist
+node_modules

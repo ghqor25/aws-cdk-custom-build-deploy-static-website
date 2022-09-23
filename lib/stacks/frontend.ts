@@ -1,7 +1,6 @@
 import { aws_cloudfront, aws_cloudfront_origins, aws_codecommit, aws_s3, Duration, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { BuildDeployStaticWebsite } from 'src/constructs/build-deploy-staticwebsite';
-import { BuildDeployStaticWebsiteSource } from 'src/constructs/build-deploy-staticwebsite-source';
+import { BuildDeployStaticWebsite, BuildDeployStaticWebsiteSource } from 'src/index';
 
 export class FrontendStack extends Stack {
    constructor(scope: Construct, id: string, props?: StackProps) {

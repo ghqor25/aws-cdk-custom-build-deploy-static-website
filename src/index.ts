@@ -1,4 +1,4 @@
-import { BuildDeployStaticWebsite } from 'src/constructs/build-deploy-staticwebsite';
-import { BuildDeployStaticWebsiteSource } from 'src/constructs/build-deploy-staticwebsite-source';
+import { BuildDeployStaticWebsite } from 'src/lib/build-deploy-static-website';
+import { BuildDeployStaticWebsiteSource } from 'src/lib/build-deploy-static-website-source';
 
 export { BuildDeployStaticWebsite, BuildDeployStaticWebsiteSource };
