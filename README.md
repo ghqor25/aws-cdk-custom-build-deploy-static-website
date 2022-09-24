@@ -22,3 +22,6 @@ put missing export
 
 ## 0.0.3
 trying to fix type error problem
+
+## 0.0.4
+fix some interface name problem

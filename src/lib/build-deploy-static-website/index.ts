@@ -4,8 +4,11 @@ import { CloudfrontInvalidation } from '../cloudfront-invalidation/index';
 
 export interface BuildDeployStaticWebsiteProps {
    /**
-    * input source for build. you can directly use ``` aws_codepipeline_actions.*SourceActions ```,
-    * or use ``` BuildDeployStaticWebsiteSource ```, which is a simple wrapper class for easy use of SourceActions
+    * Input source for build.
+    *
+    * Recommend to use ``` BuildDeployStaticWebsiteSource ```, which is a simple wrapper class for easy use of SourceActions.
+    *
+    * Also, you can directly use ``` SourceActions ``` in ``` aws_codepipeline_actions ```
     */
    readonly source:
       | aws_codepipeline_actions.S3SourceAction
@@ -14,92 +17,92 @@ export interface BuildDeployStaticWebsiteProps {
       | aws_codepipeline_actions.CodeCommitSourceAction
       | aws_codepipeline_actions.CodeStarConnectionsSourceAction;
    /**
-    * installation scripts in codebuild before the regular commands
+    * Installation scripts to run in CodeBuild before the regular commands
     */
    readonly installCommands: string[];
    /**
-    * main scripts to run in codebuild.
+    * Main scripts to run in CodeBuild.
     */
    readonly buildCommands: string[];
    /**
-    * destination bucket. the build output files will be deployed to this bucket.
+    * Destination S3 bucket. The build output files will be deployed to this bucket.
+    *
+    * @caution The bucket will be cleaned up before deployment. Be sure this bucket is only used for this.
     */
    readonly destinationBucket: aws_s3.IBucket;
    /**
-    * The CloudFront distribution Id.
-    * If this value is set, files in the distribution's edge caches will be invalidated.
+    * Id of distribution in Cloudfront, using ```destinationBucket``` as an origin.
+    *
+    * If this value is set, all files in the distribution's edge caches will be invalidated after the deployment of build output.
+    * @default - no CloudFront invalidation.
     */
    readonly cloudfrontDistributionId?: string;
    /**
-    * The directory that will contain the primary output artifact.
-    * After running the script, the contents of the given directory will be treated as the primary output.
+    * The directory that will contain output files.
     *
-    *  ```ts
-    * pipelines.CodePipelineSource.gitHub('owner/repo', 'main');
-    * ```
-    *
+    * After running the script, the contents of the given directory will be deployed to S3.
     * @default "build"
     */
    readonly primaryOutputDirectory?: string;
    /**
-    * Represents one or more paths, relative to primaryOutputDirectory, that CodeBuild will exclude from the build artifacts.
+    * If you want to exclude some files from build output, use this property.
+    *
+    * Represents one or more paths, relative to ```primaryOutputDirectory```, that CodeBuild will exclude from output.
+    * @see https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.artifacts.exclude-paths
     */
    readonly primaryOutputExcludePaths?: string[];
    /**
-    * build environment for codebuild.
+    * The build image used for CodeBuild.
+    * @default aws_codebuild.LinuxBuildImage.STANDARD_6_0
     */
-   readonly buildEnvironment?: {
-      /**
-       * The image used for the builds.
-       * @default aws_codebuild.LinuxBuildImage.STANDARD_6_0
-       */
-      readonly buildImage?: aws_codebuild.IBuildImage;
-      /**
-       * The type of compute to use for this build.
-       * @default aws_codebuild.ComputeType.SMALL
-       */
-      readonly computeType?: aws_codebuild.ComputeType;
-   };
+   readonly buildImage?: aws_codebuild.IBuildImage;
    /**
-    * runtime versions for codebuild.
+    * The compute type to use for CodeBuild.
+    * @default aws_codebuild.ComputeType.SMALL
+    */
+   readonly computeType?: aws_codebuild.ComputeType;
+   /**
+    * Runtime versions for CodeBuild.
+    * Currently, only nodejs available.
     */
    readonly runtimeVersions?: {
       /**
-       * nodejs version
+       * Nodejs version
        * @default 16
        */
-      readonly nodejs: 8 | 10 | 12 | 14 | 16;
+      readonly nodejs: 14 | 16;
    };
    /**
-    * The environment variables can be injected when building website.
-    * If a variable with the same name was set both on the project level, and here, this value will take precedence.
+    * The environment variables pass to CodeBuild.
+    * If the variable with same name exists in build project, this value will get priority.
     */
    readonly environmentVariables?: { [name: string]: aws_codebuild.BuildEnvironmentVariable };
    /**
-    * Indicates whether to rerun the codepipeline after you update ```BuildDeployStaticWebsite``` props.
+    * Whether to re-run CodePipeline of this ```BuildDeployStaticWebsite``` procedure, when you update it.
     * @default false
     */
    readonly restartExecutionOnUpdate?: boolean;
 }
 
 /**
- * simple custom codepipeline made for build static website and deploy it to s3, also support cloudfront invalidation.
+ * Simple custom CodePipeline for build static website and deploy to s3, also support cloudfront invalidation.
  *
- * It enables to make independent pipeline for frontend build deploy, triggered by source.
- * also, it enables to use environment variables referencing cdk resources.
+ * It enables to make independent CodePipeline for frontend and use environment variables referencing other cdk resources.
  */
 export class BuildDeployStaticWebsite extends Construct {
    /**
-    * simple custom codepipeline made for build static website and deploy it to s3, also support cloudfront invalidation.
+    * Simple custom CodePipeline for build static website and deploy to s3, also support cloudfront invalidation.
     *
-    * It enables to make independent pipeline for frontend build deploy, triggered by source.
-    * also, it enables to use environment variables referencing cdk resources.
+    * It enables to make independent CodePipeline for frontend and use environment variables referencing other cdk resources.
     */
    constructor(scope: Construct, id: string, props: BuildDeployStaticWebsiteProps) {
       super(scope, id);
 
       const buildProject = new aws_codebuild.Project(this, 'BuildProject', {
-         environment: props.buildEnvironment ?? { buildImage: aws_codebuild.LinuxBuildImage.STANDARD_6_0, computeType: aws_codebuild.ComputeType.SMALL },
+         environment: {
+            buildImage: props.buildImage ?? aws_codebuild.LinuxBuildImage.STANDARD_6_0,
+            computeType: props.computeType ?? aws_codebuild.ComputeType.SMALL,
+         },
 
          buildSpec: aws_codebuild.BuildSpec.fromObject({
             version: 0.2,
@@ -123,14 +126,12 @@ export class BuildDeployStaticWebsite extends Construct {
 
       const pipeline = new aws_codepipeline.Pipeline(this, 'Pipeline', { restartExecutionOnUpdate: props.restartExecutionOnUpdate ?? false });
 
-      // source
       pipeline.addStage({
          stageName: 'Source',
          actions: [props.source],
       });
-      if (!props.source.actionProperties?.outputs?.[0]) throw Error('source input does not have output artifact. please check again');
+      if (!props.source.actionProperties?.outputs?.[0]) throw Error('source input does not have output artifact. please check your source is correctly set.');
 
-      // build
       const buildOutput = new aws_codepipeline.Artifact('BuildArtifact');
       pipeline.addStage({
          stageName: 'Build',
@@ -146,13 +147,11 @@ export class BuildDeployStaticWebsite extends Construct {
          ],
       });
 
-      // deploy
       pipeline.addStage({
          stageName: 'Deploy',
          actions: [new aws_codepipeline_actions.S3DeployAction({ actionName: 'S3DeployAction', input: buildOutput, bucket: props.destinationBucket })],
       });
 
-      // invalidation
       if (props.cloudfrontDistributionId) {
          pipeline.addStage({
             stageName: 'Invalidation',

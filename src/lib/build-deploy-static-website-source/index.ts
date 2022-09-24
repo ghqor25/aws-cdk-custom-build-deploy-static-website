@@ -1,7 +1,7 @@
 import { aws_codecommit, aws_codepipeline, aws_codepipeline_actions, aws_ecr, aws_s3 } from 'aws-cdk-lib';
 
 /**
- * simple wrapper for easy use of codepipeline input action. followed shape of ```pipelines.CodePipelineSource```
+ * Wrapper class for easy use of codepipeline SourceActions. followed shape of ```pipelines.CodePipelineSource```
  */
 export class BuildDeployStaticWebsiteSource {
    /**
@@ -68,7 +68,7 @@ export class BuildDeployStaticWebsiteSource {
       });
    }
    /**
-    * A CodePipeline source action for the CodeStar Connections source, which allows connecting to GitHub and BitBucket.
+    * CodePipeline source action for the CodeStar Connections source, which allows connecting to GitHub and BitBucket.
     * @param ownerRepo Pass in the owner and repository in a single string, like: ``` 'owner/repo' ``` , with no spaces
     * @param branch The branch to use.
     * @param props Source properties
