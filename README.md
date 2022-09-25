@@ -6,7 +6,7 @@ It's combination of aws-cdk-lib
 - CodePipeline, CodeBuild, StepFunctions with lambda ( for managing S3, Cloudfront with aws-sdk )
 
 It enables to 
-- make independent* CodePipeline for frontend 
+- make independent CodePipeline for frontend 
 - use environment variables referencing other aws-cdk resources
 
 ## CodePipeline Description
@@ -19,6 +19,7 @@ PreDeploy          | empty S3 bucket before deploy
 Deploy             | deploy the build output to S3
 Invalidation       | (optional) If you are using Cloudfront, cache invalidation will be done.
 
+## Usage
 
 ```typescript
 // destination bucket where to put static website build
