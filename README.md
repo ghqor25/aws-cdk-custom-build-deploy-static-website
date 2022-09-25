@@ -18,6 +18,7 @@ fix relative path error
 
 ## 0.0.2
 fix destinationBucket interface
+
 put missing export
 
 ## 0.0.3
@@ -25,4 +26,7 @@ trying to fix type error problem
 
 ## 0.0.4
 fix some interface name problem
+
 add predeploy stage - empty s3 bucket before deploy
+
+fixed readme
