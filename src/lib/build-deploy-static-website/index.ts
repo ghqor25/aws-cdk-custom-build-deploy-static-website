@@ -54,7 +54,10 @@ export interface BuildDeployStaticWebsiteProps {
    readonly primaryOutputExcludePaths?: string[];
    /**
     * The build image used for CodeBuild.
-    * @default aws_codebuild.LinuxBuildImage.STANDARD_5_0
+    *
+    * You can change build image, but becareful for runtime support
+    * @see https://docs.aws.amazon.com/ko_kr/codebuild/latest/userguide/available-runtimes.html
+    * @default aws_codebuild.LinuxBuildImage.STANDARD_6_0
     */
    readonly buildImage?: aws_codebuild.IBuildImage;
    /**
@@ -69,7 +72,7 @@ export interface BuildDeployStaticWebsiteProps {
    readonly runtimeVersions?: {
       /**
        * Nodejs version
-       * @default 14
+       * @default 16
        */
       readonly nodejs: 14 | 16;
    };
@@ -101,14 +104,14 @@ export class BuildDeployStaticWebsite extends Construct {
 
       const buildProject = new aws_codebuild.Project(this, 'BuildProject', {
          environment: {
-            buildImage: props.buildImage ?? aws_codebuild.LinuxBuildImage.STANDARD_5_0,
+            buildImage: props.buildImage ?? aws_codebuild.LinuxBuildImage.STANDARD_6_0,
             computeType: props.computeType ?? aws_codebuild.ComputeType.SMALL,
          },
          buildSpec: aws_codebuild.BuildSpec.fromObject({
             version: 0.2,
             phases: {
                install: {
-                  'runtime-versions': props.runtimeVersions ?? ({ nodejs: 14 } as BuildDeployStaticWebsiteProps['runtimeVersions']),
+                  'runtime-versions': props.runtimeVersions ?? ({ nodejs: 16 } as BuildDeployStaticWebsiteProps['runtimeVersions']),
                   commands: props.installCommands,
                },
                build: {
