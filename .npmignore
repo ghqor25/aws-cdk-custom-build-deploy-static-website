@@ -37,6 +37,7 @@ test
 # files
 *.ts
 !*.d.ts
+*.tgz
 
 # except config
 .eslintignore

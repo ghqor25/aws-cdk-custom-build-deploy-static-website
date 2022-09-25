@@ -32,6 +32,7 @@ cdk.out
 !jest.config.js
 *.d.ts
 *.generated.ts
+*.tgz
 
 # folders
 coverage
