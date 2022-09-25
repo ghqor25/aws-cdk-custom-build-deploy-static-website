@@ -1,4 +1,4 @@
-import { aws_codebuild, aws_codepipeline, aws_codepipeline_actions, aws_iam, aws_lambda, aws_lambda_nodejs, aws_s3, Duration } from 'aws-cdk-lib';
+import { aws_codebuild, aws_codepipeline, aws_codepipeline_actions, aws_s3 } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { CloudfrontInvalidation } from '../cloudfront-invalidation/index';
 import { S3EmptyBucket } from '../s3-empty-bucket/index';
@@ -104,7 +104,6 @@ export class BuildDeployStaticWebsite extends Construct {
             buildImage: props.buildImage ?? aws_codebuild.LinuxBuildImage.STANDARD_6_0,
             computeType: props.computeType ?? aws_codebuild.ComputeType.SMALL,
          },
-
          buildSpec: aws_codebuild.BuildSpec.fromObject({
             version: 0.2,
             phases: {
@@ -180,4 +179,3 @@ export class BuildDeployStaticWebsite extends Construct {
       }
    }
 }
-const getCloudfrontDistributionArn = (account: string, distributionId: string) => `arn:aws:cloudfront::${account}:distribution/${distributionId}`;
