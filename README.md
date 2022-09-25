@@ -1,17 +1,45 @@
-# Welcome to your CDK TypeScript project
+# AWS CDK CUSTOM CONSTRUCT
 
-This is a blank project for CDK development with TypeScript.
+---
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+custom codepipeline made for build,deploy,cloudfront invalidation(optional) for static website 
 
-## Useful commands
+```typescript
+// destination bucket where to put static website build
+declare websiteS3Bucket : aws_s3.Bucket
+// cloudfront distribution for static website
+declare cloudfrontDistribution : aws_cloudfront.Distribution
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+// this is where to use BuildDeployStaticWebsite
+new BuildDeployStaticWebsite(this, 'PipelineFrontend', {
+    // you can use BuildDeployStaticWebsiteSource for source action, 
+    source: BuildDeployStaticWebsiteSource.codeCommit(
+        aws_codecommit.Repository.fromRepositoryName(this, 'CodeCommit', 'aws-cdk-custom-build-deploy-static-website-frontend'),
+        'main',
+    ),
+    // or directly use SourceActions in aws_codepipeline_actions
+    source: new aws_codepipeline_actions.CodeCommitSourceAction({
+        actionName: 'CodeCommitSourceAction',
+        output: new aws_codepipeline.Artifact('sourceArtifact'),
+        repository: aws_codecommit.Repository.fromRepositoryName(this, 'CodeCommit', 'aws-cdk-custom-build-deploy-static-website-frontend'),
+        branch: 'main',
+    }),
+    // install script for website build
+    installCommands: ['yarn set version 3.2.1', 'yarn install'],
+    // run script for website build
+    buildCommands: ['yarn test', 'yarn build'],
+    // you can reference aws cdk resources into website build environment variables like below
+    environmentVariables: {
+        REACT_APP_TEST: { value: cloudfrontDistribution.distributionDomainName },
+    },
+    // The build output files will be deployed to this bucket.
+    // bucket files will be all cleaned up before deployment.
+    destinationBucket: websiteS3Bucket,
+    // If this value is set, all files in the distribution's edge caches will be invalidated after the deployment of build output.
+    cloudfrontDistributionId: cloudfrontDistribution.distributionId,
+    /** there is some optional props more. */
+});
+```
 
 ## 0.0.1
 fix relative path error
@@ -30,3 +58,5 @@ fix some interface name problem
 add predeploy stage - empty s3 bucket before deploy
 
 fixed readme
+
+fixed some props initial value

@@ -1,4 +1,15 @@
-import { aws_cloudfront, aws_cloudfront_origins, aws_codecommit, aws_s3, Duration, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
+import {
+   aws_cloudfront,
+   aws_cloudfront_origins,
+   aws_codecommit,
+   aws_codepipeline,
+   aws_codepipeline_actions,
+   aws_s3,
+   Duration,
+   RemovalPolicy,
+   Stack,
+   StackProps,
+} from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { BuildDeployStaticWebsite, BuildDeployStaticWebsiteSource } from '@project_test';
 
@@ -44,10 +55,18 @@ export class FrontendStack extends Stack {
 
       // this is where to use BuildDeployStaticWebsite
       new BuildDeployStaticWebsite(this, 'PipelineFrontend', {
+         // recommend to use BuildDeployStaticWebsiteSource for source
          source: BuildDeployStaticWebsiteSource.codeCommit(
             aws_codecommit.Repository.fromRepositoryName(this, 'CodeCommit', 'aws-cdk-custom-build-deploy-static-website-frontend'),
             'main',
          ),
+         // or you can directly use SourceActions in aws_codepipeline_actions
+         // source: new aws_codepipeline_actions.CodeCommitSourceAction({
+         //    actionName: 'CodeCommitSourceAction',
+         //    output: new aws_codepipeline.Artifact('sourceArtifact'),
+         //    repository: aws_codecommit.Repository.fromRepositoryName(this, 'CodeCommit', 'aws-cdk-custom-build-deploy-static-website-frontend'),
+         //    branch: 'main',
+         // }),
          installCommands: ['yarn set version 3.2.1', 'yarn install'],
          buildCommands: ['yarn test', 'yarn build'],
          // you can reference aws cdk resources into website build environment variables.
