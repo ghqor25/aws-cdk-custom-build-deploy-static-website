@@ -1,15 +1,4 @@
-import {
-   aws_cloudfront,
-   aws_cloudfront_origins,
-   aws_codecommit,
-   aws_codepipeline,
-   aws_codepipeline_actions,
-   aws_s3,
-   Duration,
-   RemovalPolicy,
-   Stack,
-   StackProps,
-} from 'aws-cdk-lib';
+import { aws_cloudfront, aws_cloudfront_origins, aws_codecommit, aws_s3, Duration, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { BuildDeployStaticWebsite, BuildDeployStaticWebsiteSource } from '@project_test';
 
@@ -27,7 +16,7 @@ export class FrontendStack extends Stack {
       //    autoDeleteObjects: true,
       //    removalPolicy: RemovalPolicy.DESTROY,
       // });
-      const websiteS3Bucket = aws_s3.Bucket.fromBucketArn(this, 'testBucketweb', 'arn:aws:s3:::testbucketforwebsitehelloworld');
+      const websiteS3Bucket = aws_s3.Bucket.fromBucketName(this, 'testBucketweb', 'testbucketforwebsitehelloworld');
 
       /**
        * this is for keep s3Bucket to block public access and only grant access to cloudfront distribution

@@ -5,7 +5,7 @@ custom aws cdk codepipeline made for build, deploy, cloudfront invalidation(opti
 It's combination of aws-cdk-lib 
 - CodePipeline, CodeBuild, StepFunctions with lambda ( for managing S3, Cloudfront with aws-sdk )
 
-It enables to 
+## Purpose
 - make independent CodePipeline for frontend 
 - use environment variables referencing other aws-cdk resources
 
