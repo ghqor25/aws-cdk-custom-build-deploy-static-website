@@ -56,7 +56,7 @@ export class FrontendStack extends Stack {
          //    repository: aws_codecommit.Repository.fromRepositoryName(this, 'CodeCommit', 'aws-cdk-custom-build-deploy-static-website-frontend'),
          //    branch: 'main',
          // }),
-         installCommands: ['yarn set version stable', 'yarn install'],
+         installCommands: ['yarn set version 3.2.1', 'yarn install'],
          buildCommands: ['yarn test', 'yarn build'],
          // you can reference aws cdk resources into website build environment variables.
          environmentVariables: {

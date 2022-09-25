@@ -147,7 +147,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-cloudfront@npm:^3.171.0":
+"@aws-sdk/client-cloudfront@npm:^3.178.0":
   version: 3.178.0
   resolution: "@aws-sdk/client-cloudfront@npm:3.178.0"
   dependencies:
@@ -190,49 +190,6 @@ __metadata:
     fast-xml-parser: 3.19.0
     tslib: ^2.3.1
   checksum: c6f7c1dc13b78b878fa20437f16311f125ec2ff48d493a5b134630f413abd0ad1c014fe4b11b982391a46f060315f2be29c5e8a239aa03aa2f3f4646da962984
-  languageName: node
-  linkType: hard
-
-"@aws-sdk/client-codepipeline@npm:^3.178.0":
-  version: 3.178.0
-  resolution: "@aws-sdk/client-codepipeline@npm:3.178.0"
-  dependencies:
-    "@aws-crypto/sha256-browser": 2.0.0
-    "@aws-crypto/sha256-js": 2.0.0
-    "@aws-sdk/client-sts": 3.178.0
-    "@aws-sdk/config-resolver": 3.178.0
-    "@aws-sdk/credential-provider-node": 3.178.0
-    "@aws-sdk/fetch-http-handler": 3.178.0
-    "@aws-sdk/hash-node": 3.178.0
-    "@aws-sdk/invalid-dependency": 3.178.0
-    "@aws-sdk/middleware-content-length": 3.178.0
-    "@aws-sdk/middleware-host-header": 3.178.0
-    "@aws-sdk/middleware-logger": 3.178.0
-    "@aws-sdk/middleware-recursion-detection": 3.178.0
-    "@aws-sdk/middleware-retry": 3.178.0
-    "@aws-sdk/middleware-serde": 3.178.0
-    "@aws-sdk/middleware-signing": 3.178.0
-    "@aws-sdk/middleware-stack": 3.178.0
-    "@aws-sdk/middleware-user-agent": 3.178.0
-    "@aws-sdk/node-config-provider": 3.178.0
-    "@aws-sdk/node-http-handler": 3.178.0
-    "@aws-sdk/protocol-http": 3.178.0
-    "@aws-sdk/smithy-client": 3.178.0
-    "@aws-sdk/types": 3.178.0
-    "@aws-sdk/url-parser": 3.178.0
-    "@aws-sdk/util-base64-browser": 3.170.0
-    "@aws-sdk/util-base64-node": 3.170.0
-    "@aws-sdk/util-body-length-browser": 3.170.0
-    "@aws-sdk/util-body-length-node": 3.170.0
-    "@aws-sdk/util-defaults-mode-browser": 3.178.0
-    "@aws-sdk/util-defaults-mode-node": 3.178.0
-    "@aws-sdk/util-user-agent-browser": 3.178.0
-    "@aws-sdk/util-user-agent-node": 3.178.0
-    "@aws-sdk/util-utf8-browser": 3.170.0
-    "@aws-sdk/util-utf8-node": 3.170.0
-    tslib: ^2.3.1
-    uuid: ^8.3.2
-  checksum: d9b26c7fab431db02adc74433420469a1f179e107ff22f84bf4a058d2514869d7e228719835247116c42c84fcd3c35351982ceed0db9a5d90e1db1386a55be58
   languageName: node
   linkType: hard
 
@@ -1965,18 +1922,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@project_test@file:t.tgz::locator=%40songbaek%2Faws-cdk-build-deploy-static-website%40workspace%3A.":
+"@project_test@file:keep.tgz::locator=%40songbaek%2Faws-cdk-build-deploy-static-website%40workspace%3A.":
   version: 0.0.3
-  resolution: "@project_test@file:t.tgz::locator=%40songbaek%2Faws-cdk-build-deploy-static-website%40workspace%3A."
+  resolution: "@project_test@file:keep.tgz::locator=%40songbaek%2Faws-cdk-build-deploy-static-website%40workspace%3A."
   dependencies:
-    "@aws-sdk/client-cloudfront": ^3.171.0
+    "@aws-sdk/client-cloudfront": ^3.178.0
     "@aws-sdk/client-s3": ^3.178.0
+    aws-cdk-lib: ^2.32.1
+    constructs: ^10.0.9
   peerDependencies:
-    "@aws-sdk/client-cloudfront": ^3.171.0
-    "@aws-sdk/client-s3": ^3.178.0
-    aws-cdk-lib: ^2.40.0
-    constructs: ^10.0.0
-  checksum: d208b292392ad1428cb02b5208d4055847733d4d9e7feeabc15804dc40b45dc1d2202f908e8fe9d930ad28f39e6f3b91de2c31989f33347a1b2904ba8c434bfb
+    "@aws-sdk/client-cloudfront": ^3.40.0
+    "@aws-sdk/client-s3": ^3.40.0
+    aws-cdk-lib: ^2.32.1
+    constructs: ^10.0.9
+  checksum: 6d9df62991a7b999cf2b5e6788ff09c5d5aac10533a1b20fd4b68e062266eee337dd8c44b88c0b6329c333daf7039dff0475fa2d33c99219e382cfdb087e59f2
   languageName: node
   linkType: hard
 
@@ -2002,18 +1961,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@songbaek/aws-cdk-build-deploy-static-website@workspace:."
   dependencies:
-    "@aws-sdk/client-cloudfront": ^3.171.0
-    "@aws-sdk/client-codepipeline": ^3.178.0
+    "@aws-sdk/client-cloudfront": ^3.178.0
     "@aws-sdk/client-s3": ^3.178.0
-    "@project_test": "file:t.tgz"
+    "@project_test": "file:keep.tgz"
     "@types/aws-lambda": ^8.10.104
     "@types/jest": ^27.5.2
     "@types/node": 10.17.27
     "@types/prettier": 2.6.0
     "@typescript-eslint/eslint-plugin": ^5.38.0
-    aws-cdk: 2.25.0
-    aws-cdk-lib: 2.25.0
-    constructs: 10.0.9
+    aws-cdk: ^2.32.1
+    aws-cdk-lib: ^2.32.1
+    constructs: ^10.0.9
     eslint: ^8.21.0
     eslint-config-prettier: ^8.5.0
     eslint-import-resolver-typescript: ^3.4.1
@@ -2029,7 +1987,7 @@ __metadata:
   peerDependencies:
     "@aws-sdk/client-cloudfront": ^3.40.0
     "@aws-sdk/client-s3": ^3.40.0
-    aws-cdk-lib: ^2.0.0
+    aws-cdk-lib: ^2.32.1
     constructs: ^10.0.9
   languageName: unknown
   linkType: soft
@@ -2545,28 +2503,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-cdk-lib@npm:2.25.0":
-  version: 2.25.0
-  resolution: "aws-cdk-lib@npm:2.25.0"
+"aws-cdk-lib@npm:^2.32.1":
+  version: 2.43.1
+  resolution: "aws-cdk-lib@npm:2.43.1"
   dependencies:
     "@balena/dockerignore": ^1.0.2
     case: 1.6.3
     fs-extra: ^9.1.0
     ignore: ^5.2.0
-    jsonschema: ^1.4.0
+    jsonschema: ^1.4.1
     minimatch: ^3.1.2
     punycode: ^2.1.1
     semver: ^7.3.7
     yaml: 1.10.2
   peerDependencies:
     constructs: ^10.0.0
-  checksum: 0371699d71e223ec47ff6f163fadbc56c080d88f3da2448771559ace0e49902e0cc6ac40d3a147afd1a788f872e898fc92493400aee9c5d1ed06665cf224a57c
+  checksum: 92e99ec82e0afb3d2a0d32b8a773c99ecc8709a65050e8fab4534c7f2612d23b6c567e76ef07dc16d1b640587f8850a72b1052122c8eaefa9d15c2565f25ddab
   languageName: node
   linkType: hard
 
-"aws-cdk@npm:2.25.0":
-  version: 2.25.0
-  resolution: "aws-cdk@npm:2.25.0"
+"aws-cdk@npm:^2.32.1":
+  version: 2.43.1
+  resolution: "aws-cdk@npm:2.43.1"
   dependencies:
     fsevents: 2.3.2
   dependenciesMeta:
@@ -2574,7 +2532,7 @@ __metadata:
       optional: true
   bin:
     cdk: bin/cdk
-  checksum: 6591ce7485ab8efd7fb3a4c37d655fef677a954b7b53a1a5894bc59a8d2848bd7b5f6a4096ffc4094cfd7950a3e7db40ecd00c82ca43406d4c2bc5bb877048c6
+  checksum: b9becb28292f98e872518be5ac50a19c533551db1105cad1912290952d898dca58866ab28452d42a02e06b6ade129b882fa335b052faf485d6420b3996a8bb4c
   languageName: node
   linkType: hard
 
@@ -2949,10 +2907,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"constructs@npm:10.0.9":
-  version: 10.0.9
-  resolution: "constructs@npm:10.0.9"
-  checksum: 29d80cd3ac7505ef3cc472ce4c76dd8a3a475928bc51566726c39dd6c4d68eb2c5af6f2830c874925832108dc094564360aa83abcf3e66a4164b47cb96a70cd1
+"constructs@npm:^10.0.9":
+  version: 10.1.112
+  resolution: "constructs@npm:10.1.112"
+  checksum: 297166f01ae45468bb6fdac94936637c1adcc807c50a2ef694257406c33b9ec2a1b5dd9843a68a8afba09c9103c644b5a627ef6eb7d773916ce0aed310684900
   languageName: node
   linkType: hard
 
@@ -4825,7 +4783,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonschema@npm:^1.4.0":
+"jsonschema@npm:^1.4.1":
   version: 1.4.1
   resolution: "jsonschema@npm:1.4.1"
   checksum: 1ef02a6cd9bc32241ec86bbf1300bdbc3b5f2d8df6eb795517cf7d1cd9909e7beba1e54fdf73990fd66be98a182bda9add9607296b0cb00b1348212988e424b2
