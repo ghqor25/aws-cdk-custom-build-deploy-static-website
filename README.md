@@ -25,3 +25,4 @@ trying to fix type error problem
 
 ## 0.0.4
 fix some interface name problem
+add predeploy stage - empty s3 bucket before deploy

@@ -60,8 +60,8 @@ export class CloudfrontInvalidation extends Construct {
       });
 
       const choiceResult = new aws_stepfunctions.Choice(this, 'Invalidation Complete?', { inputPath: '$.Payload' })
-         .when(aws_stepfunctions.Condition.stringEquals('$.status', 'SUCCEEDED'), new aws_stepfunctions.Succeed(this, 'Succeeded'))
-         .when(aws_stepfunctions.Condition.stringEquals('$.status', 'FAILED'), new aws_stepfunctions.Fail(this, 'Failed'))
+         .when(aws_stepfunctions.Condition.stringEquals('$.STATUS', 'SUCCEEDED'), new aws_stepfunctions.Succeed(this, 'Succeeded'))
+         .when(aws_stepfunctions.Condition.stringEquals('$.STATUS', 'FAILED'), new aws_stepfunctions.Fail(this, 'Failed'))
          .otherwise(wait30Secs);
 
       this.stateMachine = new aws_stepfunctions.StateMachine(this, 'StateMachine', {

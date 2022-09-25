@@ -1,6 +1,7 @@
-import { aws_codebuild, aws_codepipeline, aws_codepipeline_actions, aws_s3 } from 'aws-cdk-lib';
+import { aws_codebuild, aws_codepipeline, aws_codepipeline_actions, aws_iam, aws_lambda, aws_lambda_nodejs, aws_s3, Duration } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { CloudfrontInvalidation } from '../cloudfront-invalidation/index';
+import { S3EmptyBucket } from '../s3-empty-bucket/index';
 
 export interface BuildDeployStaticWebsiteProps {
    /**
@@ -148,6 +149,19 @@ export class BuildDeployStaticWebsite extends Construct {
       });
 
       pipeline.addStage({
+         stageName: 'PreDeploy',
+         actions: [
+            new aws_codepipeline_actions.StepFunctionInvokeAction({
+               actionName: 'StepFunctionInvokeAction',
+               stateMachine: new S3EmptyBucket(this, 'S3EmptyBucket', {
+                  bucketArn: props.destinationBucket.bucketArn,
+                  bucketName: props.destinationBucket.bucketName,
+               }).stateMachine,
+            }),
+         ],
+      });
+
+      pipeline.addStage({
          stageName: 'Deploy',
          actions: [new aws_codepipeline_actions.S3DeployAction({ actionName: 'S3DeployAction', input: buildOutput, bucket: props.destinationBucket })],
       });
@@ -166,3 +180,4 @@ export class BuildDeployStaticWebsite extends Construct {
       }
    }
 }
+const getCloudfrontDistributionArn = (account: string, distributionId: string) => `arn:aws:cloudfront::${account}:distribution/${distributionId}`;
