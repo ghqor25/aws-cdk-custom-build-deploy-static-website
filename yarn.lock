@@ -1965,9 +1965,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@project_test@file:test.tgz::locator=%40songbaek%2Faws-cdk-build-deploy-static-website%40workspace%3A.":
+"@project_test@file:tester.tgz::locator=%40songbaek%2Faws-cdk-build-deploy-static-website%40workspace%3A.":
   version: 0.0.3
-  resolution: "@project_test@file:test.tgz::locator=%40songbaek%2Faws-cdk-build-deploy-static-website%40workspace%3A."
+  resolution: "@project_test@file:tester.tgz::locator=%40songbaek%2Faws-cdk-build-deploy-static-website%40workspace%3A."
   dependencies:
     "@aws-sdk/client-cloudfront": ^3.171.0
     "@aws-sdk/client-s3": ^3.178.0
@@ -1976,7 +1976,7 @@ __metadata:
     "@aws-sdk/client-s3": ^3.178.0
     aws-cdk-lib: ^2.40.0
     constructs: ^10.0.0
-  checksum: 4bdf113d4e190fbb7358c90a22c42c1557fdcc7b3d96d1c7ab3c0662cdafd6c71dc2138b349169496630da9fe99b96060d865b57568cec2b999801f93acb7f19
+  checksum: e9a0808dffc3fd6dc31d64339d9001134502df4ee0df83e905432a0a990cd6fe43aecdee8fdc6b7713405f11c1306c56255da5f2f5842c0d9adc84a6b07a74bb
   languageName: node
   linkType: hard
 
@@ -2005,7 +2005,7 @@ __metadata:
     "@aws-sdk/client-cloudfront": ^3.171.0
     "@aws-sdk/client-codepipeline": ^3.178.0
     "@aws-sdk/client-s3": ^3.178.0
-    "@project_test": "file:test.tgz"
+    "@project_test": "file:tester.tgz"
     "@types/aws-lambda": ^8.10.104
     "@types/jest": ^27.5.2
     "@types/node": 10.17.27
