@@ -2076,7 +2076,7 @@ __metadata:
     "@types/prettier": 2.6.0
     "@typescript-eslint/eslint-plugin": ^5.38.0
     aws-cdk: 2.0.0
-    aws-cdk-lib: 2.40.0
+    aws-cdk-lib: 2.0.0
     constructs: 10.0.9
     eslint: ^8.21.0
     eslint-config-prettier: ^8.5.0
@@ -2691,22 +2691,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-cdk-lib@npm:2.40.0":
-  version: 2.40.0
-  resolution: "aws-cdk-lib@npm:2.40.0"
+"aws-cdk-lib@npm:2.0.0":
+  version: 2.0.0
+  resolution: "aws-cdk-lib@npm:2.0.0"
   dependencies:
     "@balena/dockerignore": ^1.0.2
     case: 1.6.3
     fs-extra: ^9.1.0
-    ignore: ^5.2.0
-    jsonschema: ^1.4.1
-    minimatch: ^3.1.2
+    ignore: ^5.1.9
+    jsonschema: ^1.4.0
+    minimatch: ^3.0.4
     punycode: ^2.1.1
-    semver: ^7.3.7
+    semver: ^7.3.5
     yaml: 1.10.2
   peerDependencies:
     constructs: ^10.0.0
-  checksum: 429878097ecd944ee9c41a8b5ef0551a288c3801a32b8ea23afd3598fbb3e7cb808e00ddaf30f720b5cfea8747f104be5a2978fcfdec0409d91c926677d17307
+  checksum: 0a590d8894c6016ff777eab41a56aab79083d732b280589bd4893da8f5ee6a464f54923ec77cf96252f3799777ceb911502353a06330422914cd04201a74f279
   languageName: node
   linkType: hard
 
@@ -4652,7 +4652,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore@npm:^5.2.0":
+"ignore@npm:^5.1.9, ignore@npm:^5.2.0":
   version: 5.2.0
   resolution: "ignore@npm:5.2.0"
   checksum: 6b1f926792d614f64c6c83da3a1f9c83f6196c2839aa41e1e32dd7b8d174cef2e329d75caabb62cb61ce9dc432f75e67d07d122a037312db7caa73166a1bdb77
@@ -5718,7 +5718,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonschema@npm:^1.4.0, jsonschema@npm:^1.4.1":
+"jsonschema@npm:^1.4.0":
   version: 1.4.1
   resolution: "jsonschema@npm:1.4.1"
   checksum: 1ef02a6cd9bc32241ec86bbf1300bdbc3b5f2d8df6eb795517cf7d1cd9909e7beba1e54fdf73990fd66be98a182bda9add9607296b0cb00b1348212988e424b2

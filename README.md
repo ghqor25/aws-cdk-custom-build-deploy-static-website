@@ -1,8 +1,18 @@
 # AWS CDK CUSTOM CONSTRUCT
 
----
+custom codepipeline made for build,deploy,cloudfront invalidation(optional) for static website, with least options.
+It's aws-cdk-lib resource combination of CodePipeline, CodeBuild, StepFunctions with lambda(for managing S3, Cloudfront with aws-sdk)
 
-custom codepipeline made for build,deploy,cloudfront invalidation(optional) for static website 
+## CodePipeline Description
+
+Stages             | Description
+-------------------|---------------------------------------------------------------------------------
+Source             | input source action for website (ex.github, codecommit)
+Build              | build project of input source
+PreDeploy          | empty S3 bucket before deploy
+Deploy             | deploy the build output to S3
+Invalidation       | (optional) If you are using Cloudfront, cache invalidation will be done
+
 
 ```typescript
 // destination bucket where to put static website build
@@ -25,7 +35,7 @@ new BuildDeployStaticWebsite(this, 'PipelineFrontend', {
         branch: 'main',
     }),
     // install script for website build
-    installCommands: ['yarn set version 3.2.1', 'yarn install'],
+    installCommands: ['yarn set version stable', 'yarn install'],
     // run script for website build
     buildCommands: ['yarn test', 'yarn build'],
     // you can reference aws cdk resources into website build environment variables like below
@@ -40,7 +50,7 @@ new BuildDeployStaticWebsite(this, 'PipelineFrontend', {
     /** there is some optional props more. */
 });
 ```
-
+<!-- 
 ## 0.0.1
 fix relative path error
 
@@ -60,3 +70,4 @@ add predeploy stage - empty s3 bucket before deploy
 fixed readme
 
 fixed some props initial value
+-->
