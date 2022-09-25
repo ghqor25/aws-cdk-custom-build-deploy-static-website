@@ -1,7 +1,10 @@
 # AWS CDK CUSTOM CONSTRUCT
 
-custom codepipeline made for build,deploy,cloudfront invalidation(optional) for static website, with least options.
-It's aws-cdk-lib resource combination of CodePipeline, CodeBuild, StepFunctions with lambda(for managing S3, Cloudfront with aws-sdk)
+custom aws cdk codepipeline made for build, deploy, cloudfront invalidation(optional) for static website.
+
+It's combination of aws-cdk-lib - CodePipeline, CodeBuild, StepFunctions with lambda ( for managing S3, Cloudfront with aws-sdk )
+
+It enables to make independent CodePipeline for frontend and use environment variables referencing other aws cdk resources.
 
 ## CodePipeline Description
 
@@ -11,7 +14,7 @@ Source             | input source action for website (ex.github, codecommit)
 Build              | build project of input source
 PreDeploy          | empty S3 bucket before deploy
 Deploy             | deploy the build output to S3
-Invalidation       | (optional) If you are using Cloudfront, cache invalidation will be done
+Invalidation       | (optional) If you are using Cloudfront, cache invalidation will be done.
 
 
 ```typescript
