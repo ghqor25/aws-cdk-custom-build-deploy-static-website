@@ -1,4 +1,4 @@
-import { aws_cloudfront, aws_cloudfront_origins, aws_codecommit, aws_s3, Duration, Stack, StackProps } from 'aws-cdk-lib';
+import { aws_cloudfront, aws_cloudfront_origins, aws_codecommit, aws_s3, Duration, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { BuildDeployStaticWebsite, BuildDeployStaticWebsiteSource } from '@songbaek/aws-cdk-build-deploy-static-website'
 
@@ -6,17 +6,16 @@ export class FrontendStack extends Stack {
    constructor(scope: Construct, id: string, props?: StackProps) {
       super(scope, id, props);
 
-      // /**
-      //  *  s3 bucket for website
-      //  */
-      // const websiteS3Bucket = new aws_s3.Bucket(this, 'WebsiteS3Bucket', {
-      //    enforceSSL: true,
-      //    blockPublicAccess: aws_s3.BlockPublicAccess.BLOCK_ALL,
-      //    publicReadAccess: false,
-      //    autoDeleteObjects: true,
-      //    removalPolicy: RemovalPolicy.DESTROY,
-      // });
-      const websiteS3Bucket = aws_s3.Bucket.fromBucketName(this, 'testBucketweb', 'testbucketforwebsitehelloworld');
+      /**
+       *  s3 bucket for website
+       */
+      const websiteS3Bucket = new aws_s3.Bucket(this, 'WebsiteS3Bucket', {
+         enforceSSL: true,
+         blockPublicAccess: aws_s3.BlockPublicAccess.BLOCK_ALL,
+         publicReadAccess: false,
+         autoDeleteObjects: true,
+         removalPolicy: RemovalPolicy.DESTROY,
+      });
 
       /**
        * this is for keep s3Bucket to block public access and only grant access to cloudfront distribution
