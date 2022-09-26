@@ -7,9 +7,11 @@ It's combination of aws-cdk-lib
 
 you can see the example code below or in github
 
+
 ## Purpose
 - make independent CodePipeline for frontend, triggered by frontend input source.
 - pass environment variables referencing other aws-cdk resources to frontend. So can use different env with each ci/cd stage(e.g. dev, prod, ...) 
+
 
 ## CodePipeline Description
 
@@ -20,6 +22,7 @@ Build              | build project of input source
 PreDeploy          | empty S3 bucket before deploy
 Deploy             | deploy the build output to S3
 Invalidation       | (optional) If you are using Cloudfront, cache invalidation will be done.
+
 
 ## Usage
 
