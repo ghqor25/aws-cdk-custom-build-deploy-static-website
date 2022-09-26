@@ -82,10 +82,20 @@ export interface BuildDeployStaticWebsiteProps {
     */
    readonly environmentVariables?: { [name: string]: aws_codebuild.BuildEnvironmentVariable };
    /**
-    * Whether to re-run CodePipeline of this ```BuildDeployStaticWebsite``` procedure, when you update it.
+    * Create KMS keys for cross-account deployments for ```BuildDeployStaticWebsite``` CodePipeline.
+    *
+    * This feature requires that KMS Customer Master Keys are created which have a cost of $1/month.
+    * If you do not need cross-account deployments, you can set this to false to not create those keys and save on that cost (the artifact bucket will be encrypted with an AWS-managed key).
     * @default false
     */
-   readonly restartExecutionOnUpdate?: boolean;
+   readonly crossAccountKeys?: boolean;
+   /**
+    * Enable KMS key rotation for the generated KMS keys in ```BuildDeployStaticWebsite``` CodePipeline.
+    *
+    * It will cost an additional $1/month if enabled
+    * @default - false
+    */
+   readonly enableKeyRotation?: boolean;
 }
 
 /**
@@ -127,7 +137,10 @@ export class BuildDeployStaticWebsite extends Construct {
          grantReportGroupPermissions: false,
       });
 
-      const pipeline = new aws_codepipeline.Pipeline(this, 'Pipeline', { restartExecutionOnUpdate: props.restartExecutionOnUpdate ?? false });
+      const pipeline = new aws_codepipeline.Pipeline(this, 'Pipeline', {
+         crossAccountKeys: props.crossAccountKeys ?? false,
+         enableKeyRotation: props.enableKeyRotation ?? false,
+      });
 
       pipeline.addStage({
          stageName: 'Source',
