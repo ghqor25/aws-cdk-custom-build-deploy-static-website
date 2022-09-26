@@ -5,12 +5,17 @@ Custom aws cdk codepipeline made for build, deploy, cloudfront invalidation(opti
 It's combination of aws-cdk-lib 
 - CodePipeline, CodeBuild, StepFunctions with lambda ( for managing empty S3 bucket, Cloudfront Invalidation with aws-sdk )
 
-you can see the example code below or in github
+You can see the example code below or in github
 
 
 ## Purpose
-- make independent CodePipeline for frontend, triggered by frontend input source.
-- pass environment variables referencing other aws-cdk resources to frontend. So can use different env with each ci/cd stage(e.g. dev, prod, ...) 
+- Make independent CodePipeline for frontend, triggered by frontend input source.
+- Pass environment variables referencing other aws-cdk resources to frontend. So can use different env with each ci/cd stage(e.g. dev, prod, ...) 
+
+
+## Caution
+- If you want to change build image, check runtime compatible.
+- This custom Codepipeline will be executed when creation, but not when update. After creation, it will be only triggered by Source Action defined in Source Stage.
 
 
 ## CodePipeline Description
