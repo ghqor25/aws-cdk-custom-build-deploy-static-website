@@ -35,6 +35,8 @@ export interface BuildDeployStaticWebsiteProps {
     * Id of distribution in Cloudfront, using ```destinationBucket``` as an origin.
     *
     * If this value is set, all files in the distribution's edge caches will be invalidated after the deployment of build output.
+    *
+    * If not set, Invalidation Stage will be excluded from ```BuildDeployStaticWebsite``` CodePipeline
     * @default - no CloudFront invalidation.
     */
    readonly cloudfrontDistributionId?: string;

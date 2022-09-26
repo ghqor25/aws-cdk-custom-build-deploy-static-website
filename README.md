@@ -20,13 +20,13 @@ You can see the example code below or in github
 
 ## CodePipeline Description
 
-Stages             | Description
--------------------|---------------------------------------------------------------------------------
-Source             | input source action for website (ex.github, codecommit)
-Build              | build project of input source
-PreDeploy          | empty S3 bucket before deploy
-Deploy             | deploy the build output to S3
-Invalidation       | (optional) If you are using Cloudfront, cache invalidation will be done.
+Stages                    | Description
+--------------------------|------------------------------------------------------------------
+Source                    | input source action for website (ex.github, codecommit)
+Build                     | build project of input source
+PreDeploy                 | empty S3 bucket before deploy
+Deploy                    | deploy the build output to S3
+Invalidation (optional)   | If you are using Cloudfront, cache invalidation will be done.
 
 
 ## Usage
