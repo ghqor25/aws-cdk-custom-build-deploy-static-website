@@ -15,13 +15,17 @@
     "pub": "yarn npm publish --access public"
   },
   "devDependencies": {
-    "@project_test": "file:keep.tgz",
+    "@aws-sdk/client-cloudfront": "^3.40.0",
+    "@aws-sdk/client-s3": "^3.40.0",
+    "@songbaek/aws-cdk-build-deploy-static-website": "^0.0.3",
     "@types/aws-lambda": "^8.10.104",
     "@types/jest": "^27.5.2",
     "@types/node": "10.17.27",
     "@types/prettier": "2.6.0",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "aws-cdk": "^2.32.1",
+    "aws-cdk-lib": "^2.32.1",
+    "constructs": "^10.0.9",
     "eslint": "^8.21.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^3.4.1",
@@ -33,17 +37,15 @@
     "ts-jest": "^27.1.4",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.0",
-    "typescript": "4.7.3"
+    "typescript": "4.7.4"
   },
   "dependencies": {
-    "@aws-sdk/client-cloudfront": "^3.178.0",
-    "@aws-sdk/client-s3": "^3.178.0",
-    "aws-cdk-lib": "^2.32.1",
-    "constructs": "^10.0.9"
+    "@aws-sdk/client-cloudfront": "^3.41.0",
+    "@aws-sdk/client-s3": "^3.41.0"
   },
   "peerDependencies": {
-    "@aws-sdk/client-cloudfront": "^3.40.0",
-    "@aws-sdk/client-s3": "^3.40.0",
+    "@aws-sdk/client-cloudfront": "^3.41.0",
+    "@aws-sdk/client-s3": "^3.41.0",
     "aws-cdk-lib": "^2.32.1",
     "constructs": "^10.0.9"
   }

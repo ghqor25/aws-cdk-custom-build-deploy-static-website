@@ -7,7 +7,7 @@ It's combination of aws-cdk-lib
 
 ## Purpose
 - make independent CodePipeline for frontend.
-- pass environment variables referencing other aws-cdk resources to frontend. ( can use different variables with dev, prod stages )
+- pass environment variables referencing other aws-cdk resources to frontend.
 
 ## CodePipeline Description
 

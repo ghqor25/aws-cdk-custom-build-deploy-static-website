@@ -147,7 +147,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-cloudfront@npm:^3.178.0":
+"@aws-sdk/client-cloudfront@npm:^3.40.0":
   version: 3.178.0
   resolution: "@aws-sdk/client-cloudfront@npm:3.178.0"
   dependencies:
@@ -193,7 +193,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-s3@npm:^3.178.0":
+"@aws-sdk/client-s3@npm:^3.40.0":
   version: 3.178.0
   resolution: "@aws-sdk/client-s3@npm:3.178.0"
   dependencies:
@@ -1922,23 +1922,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@project_test@file:keep.tgz::locator=%40songbaek%2Faws-cdk-build-deploy-static-website%40workspace%3A.":
-  version: 0.0.3
-  resolution: "@project_test@file:keep.tgz::locator=%40songbaek%2Faws-cdk-build-deploy-static-website%40workspace%3A."
-  dependencies:
-    "@aws-sdk/client-cloudfront": ^3.178.0
-    "@aws-sdk/client-s3": ^3.178.0
-    aws-cdk-lib: ^2.32.1
-    constructs: ^10.0.9
-  peerDependencies:
-    "@aws-sdk/client-cloudfront": ^3.40.0
-    "@aws-sdk/client-s3": ^3.40.0
-    aws-cdk-lib: ^2.32.1
-    constructs: ^10.0.9
-  checksum: 6d9df62991a7b999cf2b5e6788ff09c5d5aac10533a1b20fd4b68e062266eee337dd8c44b88c0b6329c333daf7039dff0475fa2d33c99219e382cfdb087e59f2
-  languageName: node
-  linkType: hard
-
 "@sinonjs/commons@npm:^1.7.0":
   version: 1.8.3
   resolution: "@sinonjs/commons@npm:1.8.3"
@@ -1957,13 +1940,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@songbaek/aws-cdk-build-deploy-static-website@workspace:.":
+"@songbaek/aws-cdk-build-deploy-static-website@^0.0.3, @songbaek/aws-cdk-build-deploy-static-website@workspace:.":
   version: 0.0.0-use.local
   resolution: "@songbaek/aws-cdk-build-deploy-static-website@workspace:."
   dependencies:
-    "@aws-sdk/client-cloudfront": ^3.178.0
-    "@aws-sdk/client-s3": ^3.178.0
-    "@project_test": "file:keep.tgz"
+    "@aws-sdk/client-cloudfront": ^3.40.0
+    "@aws-sdk/client-s3": ^3.40.0
+    "@songbaek/aws-cdk-build-deploy-static-website": ^0.0.3
     "@types/aws-lambda": ^8.10.104
     "@types/jest": ^27.5.2
     "@types/node": 10.17.27
@@ -1983,10 +1966,10 @@ __metadata:
     ts-jest: ^27.1.4
     ts-node: ^10.9.1
     tsconfig-paths: ^4.1.0
-    typescript: 4.7.3
+    typescript: 4.7.4
   peerDependencies:
-    "@aws-sdk/client-cloudfront": ^3.40.0
-    "@aws-sdk/client-s3": ^3.40.0
+    "@aws-sdk/client-cloudfront": ^3.41.0
+    "@aws-sdk/client-s3": ^3.41.0
     aws-cdk-lib: ^2.32.1
     constructs: ^10.0.9
   languageName: unknown
@@ -2908,9 +2891,9 @@ __metadata:
   linkType: hard
 
 "constructs@npm:^10.0.9":
-  version: 10.1.112
-  resolution: "constructs@npm:10.1.112"
-  checksum: 297166f01ae45468bb6fdac94936637c1adcc807c50a2ef694257406c33b9ec2a1b5dd9843a68a8afba09c9103c644b5a627ef6eb7d773916ce0aed310684900
+  version: 10.1.113
+  resolution: "constructs@npm:10.1.113"
+  checksum: 8bafdde94b64ad36cad92b5899f6dc36264b21d18a350d918b01a1e9bd9dc49cb54456396fa856865d79268a2be656f321107ce0b1b0eeb68c391d98cf6eb558
   languageName: node
   linkType: hard
 
@@ -6194,23 +6177,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:4.7.3":
-  version: 4.7.3
-  resolution: "typescript@npm:4.7.3"
+"typescript@npm:4.7.4":
+  version: 4.7.4
+  resolution: "typescript@npm:4.7.4"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: fd13a1ce53790a36bb8350e1f5e5e384b5f6cb9b0635114a6d01d49cb99916abdcfbc13c7521cdae2f2d3f6d8bc4a8ae7625edf645a04ee940588cd5e7597b2f
+  checksum: 5750181b1cd7e6482c4195825547e70f944114fb47e58e4aa7553e62f11b3f3173766aef9c281783edfd881f7b8299cf35e3ca8caebe73d8464528c907a164df
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.7.3#~builtin<compat/typescript>":
-  version: 4.7.3
-  resolution: "typescript@patch:typescript@npm%3A4.7.3#~builtin<compat/typescript>::version=4.7.3&hash=7ad353"
+"typescript@patch:typescript@4.7.4#~builtin<compat/typescript>":
+  version: 4.7.4
+  resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 137d18a77f52254a284960b16ab53d0619f57b69b5d585804b8413f798a1175ce3e774fb95e6a101868577aafe357d8fcfc9171f0dc9fc0c210e9ae59d107cc0
+  checksum: 9096d8f6c16cb80ef3bf96fcbbd055bf1c4a43bd14f3b7be45a9fbe7ada46ec977f604d5feed3263b4f2aa7d4c7477ce5f9cd87de0d6feedec69a983f3a4f93e
   languageName: node
   linkType: hard
 
