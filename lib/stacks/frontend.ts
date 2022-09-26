@@ -1,6 +1,7 @@
 import { aws_cloudfront, aws_cloudfront_origins, aws_codecommit, aws_s3, Duration, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { BuildDeployStaticWebsite, BuildDeployStaticWebsiteSource } from '@songbaek/aws-cdk-build-deploy-static-website'
+import { BuildDeployStaticWebsite, BuildDeployStaticWebsiteSource } from 'src/index';
+// import { BuildDeployStaticWebsite, BuildDeployStaticWebsiteSource } from '@songbaek/aws-cdk-build-deploy-static-website'
 
 export class FrontendStack extends Stack {
    constructor(scope: Construct, id: string, props?: StackProps) {
@@ -64,7 +65,6 @@ export class FrontendStack extends Stack {
          },
          destinationBucket: websiteS3Bucket,
          cloudfrontDistributionId: cloudfrontDistribution.distributionId,
-         restartExecutionOnUpdate: true,
       });
    }
 }
