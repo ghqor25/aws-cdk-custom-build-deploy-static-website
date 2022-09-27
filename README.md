@@ -1,19 +1,17 @@
 # AWS CDK CUSTOM CONSTRUCT
 
-Custom aws cdk codepipeline made for build, deploy, cloudfront invalidation(optional) for static website.
+Custom Aws Cdk CodePipeline made for build, deploy, cloudfront invalidation(optional) for static websites.
 
-It's combination of aws-cdk-lib 
-- CodePipeline, CodeBuild, StepFunctions with lambda ( for managing empty S3 bucket, Cloudfront Invalidation with aws-sdk )
-
-You can see the example code below or in github
-
+Personal work, so might not work in some cases. Please aware.
 
 ## Purpose
-- Make independent CodePipeline for frontend, triggered by frontend input source.
-- Pass environment variables referencing other aws-cdk resources to frontend. So can use different env with each ci/cd stage(e.g. dev, prod, ...) 
+
+- Make independent CodePipeline for frontend, triggered by only frontend input source.
+- Pass environment variables referencing other aws-cdk resources to frontend. So can use different env with each ci/cd stage.(e.g. dev, prod, ...) 
 
 
-## Caution
+## Need to know
+
 - If you want to change build image, check runtime compatible.
 - This custom Codepipeline will be executed once when creation, but not when update. After creation, it will be only triggered by Source Action defined in Source Stage.
 - Invalidation Stage might take long time(set timeout to 20 mins. But usually end ~ 5 mins). Because createInvalidation often fails especially when do it again in a short time.
@@ -21,22 +19,22 @@ You can see the example code below or in github
 
 ## CodePipeline Description
 
-Stages                    | Description
---------------------------|------------------------------------------------------------------
-Source                    | input source action for website (ex.github, codecommit)
-Build                     | build project of input source
-PreDeploy                 | empty S3 bucket before deploy
-Deploy                    | deploy the build output to S3
-Invalidation (optional)   | If you are using Cloudfront, cache invalidation will be done.
+Stages                    | Description                                                      | Aws Cdk Resources Used
+--------------------------|------------------------------------------------------------------|---------------------------------------
+Source                    | input source action for website (ex.github, codecommit)          | CodeCommit, Github,.. as input choice
+Build                     | build project of input source                                    | CodeBuild
+PreDeploy                 | empty S3 bucket before deploy                                    | Stepfunctions (2 lambda with aws-sdk)
+Deploy                    | deploy the build output to S3                                    | CodePipeline S3DeployAction
+Invalidation (optional)   | If you are using Cloudfront, cache invalidation will be done.    | Stepfunctions (2 lambda with aws-sdk)
 
 
 ## Usage
 
 ```typescript
 // destination bucket where to put static website build
-declare websiteS3Bucket : aws_s3.Bucket
-// cloudfront distribution for static website
-declare cloudfrontDistribution : aws_cloudfront.Distribution
+declare websiteS3Bucket: aws_s3.Bucket;
+// cloudfront distribution using websiteS3Bucket as an origin.
+declare cloudfrontDistribution: aws_cloudfront.Distribution;
 
 // this is where to use BuildDeployStaticWebsite
 new BuildDeployStaticWebsite(this, 'PipelineFrontend', {
@@ -88,4 +86,6 @@ add predeploy stage - empty s3 bucket before deploy
 fixed readme
 
 fixed some props initial value
+
+fixed stepfunction params problem
 -->
