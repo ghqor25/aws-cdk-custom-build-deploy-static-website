@@ -6,7 +6,7 @@ interface HandlerEvent {
 }
 
 interface HandlerResponse {
-   STATUS?: 'SUCCEEDED' | 'FAILED';
+   STATUS: 'SUCCEEDED' | 'IN_PROGRESS';
 }
 
 const cloudfrontClient = new CloudFrontClient({});
@@ -18,7 +18,10 @@ const handler = async (event: HandlerEvent): Promise<HandlerResponse> => {
    if (!invalidationId) throw Error('"INVALIDATION_ID" is required ');
 
    const result = await cloudfrontClient.send(new GetInvalidationCommand({ DistributionId: distributionId, Id: invalidationId }));
-   const status = result.Invalidation?.Status === 'Completed' ? 'SUCCEEDED' : undefined;
+
+   // cannot achieve other status value, so just treat as 'IN_PROGRESS'.
+   // @see https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetInvalidation.html#API_GetInvalidation_ResponseSyntax
+   const status = result.Invalidation?.Status === 'Completed' ? 'SUCCEEDED' : 'IN_PROGRESS';
 
    return { STATUS: status };
 };

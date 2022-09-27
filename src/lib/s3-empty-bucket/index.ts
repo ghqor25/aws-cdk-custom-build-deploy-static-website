@@ -56,7 +56,7 @@ export class S3EmptyBucket extends Construct {
 
       this.stateMachine = new aws_stepfunctions.StateMachine(this, 'StateMachine', {
          definition: listObjects.next(deleteObjects).next(choiceResult),
-         timeout: Duration.minutes(5),
+         timeout: Duration.minutes(3),
       });
    }
 }

@@ -6,7 +6,7 @@ interface HandlerEvent {
 }
 
 interface HandlerResponse {
-   STATUS?: 'SUCCEEDED' | 'FAILED';
+   STATUS?: 'SUCCEEDED';
 }
 
 const s3Client = new S3Client({});
@@ -28,9 +28,7 @@ const handler = async (event: HandlerEvent): Promise<HandlerResponse> => {
       }),
    );
 
-   if (result.Errors) {
-      throw Error('delete objects failed.' + JSON.stringify(result.Errors));
-   }
+   if (result.Errors) throw Error('delete objects failed.' + JSON.stringify(result.Errors));
 
    return { STATUS: 'SUCCEEDED' };
 };
