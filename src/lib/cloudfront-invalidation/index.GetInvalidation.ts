@@ -5,7 +5,7 @@ interface HandlerEvent {
    INVALIDATION_ID?: string;
 }
 
-interface HandlerResponse {
+interface HandlerResponse extends HandlerEvent {
    STATUS: 'SUCCEEDED' | 'IN_PROGRESS';
 }
 
@@ -19,10 +19,11 @@ const handler = async (event: HandlerEvent): Promise<HandlerResponse> => {
 
    const result = await cloudfrontClient.send(new GetInvalidationCommand({ DistributionId: distributionId, Id: invalidationId }));
 
-   // cannot achieve other status value, so just treat as 'IN_PROGRESS'.
+   // Could not get GetInvalidation response status values, but just "Completed".
+   // So will treat other values as "IN_PROGRESS"
    // @see https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetInvalidation.html#API_GetInvalidation_ResponseSyntax
-   const status = result.Invalidation?.Status === 'Completed' ? 'SUCCEEDED' : 'IN_PROGRESS';
-
-   return { STATUS: status };
+   if (result.Invalidation?.Status === 'Completed') return { STATUS: 'SUCCEEDED' };
+   else return { STATUS: 'IN_PROGRESS', DISTRIBUTION_ID: distributionId, INVALIDATION_ID: invalidationId };
 };
+
 export { handler };

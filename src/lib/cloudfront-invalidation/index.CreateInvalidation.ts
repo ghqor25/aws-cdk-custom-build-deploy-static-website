@@ -27,4 +27,5 @@ const handler = async (event: HandlerEvent): Promise<HandlerResponse> => {
       DISTRIBUTION_ID: distributionId,
    };
 };
+
 export { handler };

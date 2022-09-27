@@ -16,6 +16,7 @@ You can see the example code below or in github
 ## Caution
 - If you want to change build image, check runtime compatible.
 - This custom Codepipeline will be executed once when creation, but not when update. After creation, it will be only triggered by Source Action defined in Source Stage.
+- Invalidation Stage might take long time(set timeout to 20 mins. But usually end ~ 5 mins). Because createInvalidation often fails especially when do it again in a short time.
 
 
 ## CodePipeline Description

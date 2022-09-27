@@ -20,7 +20,7 @@ export class S3EmptyBucket extends Construct {
    constructor(scope: Construct, id: string, props: S3EmptyBucketProps) {
       super(scope, id);
 
-      const listObjects = new aws_stepfunctions_tasks.LambdaInvoke(this, 'InvokeListObjects', {
+      const listObjects = new aws_stepfunctions_tasks.LambdaInvoke(this, 'Invoke ListObjects', {
          lambdaFunction: new aws_lambda_nodejs.NodejsFunction(this, 'ListObjects', {
             bundling: { minify: true, sourceMap: false, sourcesContent: false, target: 'ES2020' },
             runtime: aws_lambda.Runtime.NODEJS_16_X,
@@ -33,9 +33,10 @@ export class S3EmptyBucket extends Construct {
             ],
          }),
          payload: { type: aws_stepfunctions.InputType.OBJECT, value: { BUCKET_NAME: props.bucketName } },
+         outputPath: '$.Payload',
       });
 
-      const deleteObjects = new aws_stepfunctions_tasks.LambdaInvoke(this, 'InvokeDeleteObjects', {
+      const deleteObjects = new aws_stepfunctions_tasks.LambdaInvoke(this, 'Invoke DeleteObjects', {
          lambdaFunction: new aws_lambda_nodejs.NodejsFunction(this, 'DeleteObjects', {
             bundling: { minify: true, sourceMap: false, sourcesContent: false, target: 'ES2020' },
             runtime: aws_lambda.Runtime.NODEJS_16_X,
@@ -47,10 +48,10 @@ export class S3EmptyBucket extends Construct {
                }),
             ],
          }),
-         inputPath: '$.Payload',
+         outputPath: '$.Payload',
       });
 
-      const choiceResult = new aws_stepfunctions.Choice(this, 'Empty Bucket Complete?', { inputPath: '$.Payload' })
+      const choiceResult = new aws_stepfunctions.Choice(this, 'Empty Bucket Complete ?')
          .when(aws_stepfunctions.Condition.stringEquals('$.STATUS', 'SUCCEEDED'), new aws_stepfunctions.Succeed(this, 'Succeeded'))
          .otherwise(new aws_stepfunctions.Fail(this, 'Failed'));
 
