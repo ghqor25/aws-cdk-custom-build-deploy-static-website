@@ -90,4 +90,6 @@ fixed readme
 fixed some props initial value
 
 fixed stepfunction params problem
+
+multi stage tested
 -->
