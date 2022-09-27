@@ -6,26 +6,28 @@ Personal work, so might not work in some cases. Please aware.
 
 ## Purpose
 
-- Make independent CodePipeline for frontend, triggered by only frontend input source.
-- Pass environment variables referencing other aws-cdk resources to frontend. So can use different env with each ci/cd stage.(e.g. dev, prod, ...) 
+- Make CodePipeline for frontend, triggered only by source trigger action. Enable to work independently with entire Cdk Pipeline.
+- Pass environment variables referencing other aws-cdk resources to frontend when build. So can use different environment variables with each ci/cd stage.(e.g. dev, prod, ...). 
 
 
 ## Need to know
 
 - If you want to change build image, check runtime compatible.
 - This custom Codepipeline will be executed once when creation, but not when update. After creation, it will be only triggered by Source Action defined in Source Stage.
+- It will automatically empty the S3 bucket before deploy the build output. Be aware of that.
+- Cloudfront Invalidation will invalidate all files in the cache. It will cost as 1 path. [Doc](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#PayingForInvalidation)
 - Invalidation Stage might take long time(set timeout to 20 mins. But usually end ~ 5 mins). Because createInvalidation often fails especially when do it again in a short time.
 
 
 ## CodePipeline Description
 
-Stages                    | Description                                                      | Aws Cdk Resources Used
---------------------------|------------------------------------------------------------------|---------------------------------------
-Source                    | input source action for website (ex.github, codecommit)          | CodeCommit, Github,.. as input choice
-Build                     | build project of input source                                    | CodeBuild
-PreDeploy                 | empty S3 bucket before deploy                                    | Stepfunctions (2 lambda with aws-sdk)
-Deploy                    | deploy the build output to S3                                    | CodePipeline S3DeployAction
-Invalidation (optional)   | If you are using Cloudfront, cache invalidation will be done.    | Stepfunctions (2 lambda with aws-sdk)
+Stages                    | Description                                                      | Aws Cdk Resources Used                 |
+--------------------------|------------------------------------------------------------------|----------------------------------------|
+Source                    | input source action for website (ex.github, codecommit)          | CodeCommit, Github,.. as input choice  |
+Build                     | build project of input source                                    | CodeBuild                              |
+PreDeploy                 | empty S3 bucket before deploy                                    | Stepfunctions (2 lambda with aws-sdk)  |
+Deploy                    | deploy the build output to S3                                    | CodePipeline S3DeployAction            |
+Invalidation (optional)   | If you are using Cloudfront, cache invalidation will be done.    | Stepfunctions (2 lambda with aws-sdk)  |
 
 
 ## Usage
