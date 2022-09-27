@@ -15,7 +15,7 @@ Personal work, so might not work in some cases. Please aware.
 - If you want to change build image, check runtime compatible.
 - This custom Codepipeline will be executed once when creation, but not when update. After creation, it will be only triggered by Source Action defined in Source Stage.
 - It will automatically empty the S3 bucket before deploy the build output. Be aware of that.
-- Cloudfront Invalidation will invalidate all files in the cache. It will cost as 1 path. [Doc](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#PayingForInvalidation)
+- Cloudfront Invalidation will invalidate all files in the cache. It will cost as 1 path. [Aws Doc](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#PayingForInvalidation)
 - Invalidation Stage might take long time(set timeout to 20 mins. But usually end ~ 5 mins). Because createInvalidation often fails especially when do it again in a short time.
 
 
