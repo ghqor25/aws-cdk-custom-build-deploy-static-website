@@ -2,7 +2,10 @@
   "name": "@songbaek/aws-cdk-build-deploy-static-website",
   "version": "0.0.4",
   "license": "Apache-2.0",
-  "repository": "https://github.com/ghqor25/aws-cdk-custom-build-deploy-static-website.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ghqor25/aws-cdk-custom-build-deploy-static-website.git"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
