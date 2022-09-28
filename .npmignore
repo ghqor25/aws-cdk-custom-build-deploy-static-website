@@ -38,6 +38,7 @@ test
 *.ts
 !*.d.ts
 *.tgz
+.vscode
 
 # except config
 .eslintignore

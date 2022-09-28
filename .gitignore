@@ -33,6 +33,7 @@ cdk.out
 *.d.ts
 *.generated.ts
 *.tgz
+.vscode
 
 # folders
 coverage
