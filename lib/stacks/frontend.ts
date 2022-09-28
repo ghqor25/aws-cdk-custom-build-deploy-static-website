@@ -1,20 +1,14 @@
-import {
-   aws_cloudfront,
-   aws_cloudfront_origins,
-   aws_codecommit,
-   aws_codepipeline,
-   aws_codepipeline_actions,
-   aws_s3,
-   Duration,
-   RemovalPolicy,
-   Stack,
-   StackProps,
-} from 'aws-cdk-lib';
+import { aws_cloudfront, aws_cloudfront_origins, aws_codecommit, aws_s3, Duration, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { BuildDeployStaticWebsite, BuildDeployStaticWebsiteSource } from '@songbaek/aws-cdk-build-deploy-static-website';
+import { BuildDeployStaticWebsite, BuildDeployStaticWebsiteSource } from 'src/index';
+
+interface FrontendStackProps extends StackProps {
+   // referencing resource that changes within stages
+   resourceBeingDifferentWithStage: string;
+}
 
 export class FrontendStack extends Stack {
-   constructor(scope: Construct, id: string, props?: StackProps) {
+   constructor(scope: Construct, id: string, props?: FrontendStackProps) {
       super(scope, id, props);
 
       /**
@@ -58,19 +52,18 @@ export class FrontendStack extends Stack {
             aws_codecommit.Repository.fromRepositoryName(this, 'CodeCommit', 'aws-cdk-custom-build-deploy-static-website-frontend'),
             'main',
          ),
-         // or you can directly use SourceActions in aws_codepipeline_actions
-         source: new aws_codepipeline_actions.CodeCommitSourceAction({
-            actionName: 'CodeCommitSourceAction',
-            output: new aws_codepipeline.Artifact('sourceArtifact'),
-            repository: aws_codecommit.Repository.fromRepositoryName(this, 'CodeCommit', 'aws-cdk-custom-build-deploy-static-website-frontend'),
-            branch: 'main',
-         }),
+         // // or you can directly use SourceActions in aws_codepipeline_actions
+         // source: new aws_codepipeline_actions.CodeCommitSourceAction({
+         //    actionName: 'CodeCommitSourceAction',
+         //    output: new aws_codepipeline.Artifact('sourceArtifact'),
+         //    repository: aws_codecommit.Repository.fromRepositoryName(this, 'CodeCommit', 'aws-cdk-custom-build-deploy-static-website-frontend'),
+         //    branch: 'main',
+         // }),
          installCommands: ['yarn set version stable', 'yarn install'],
          buildCommands: ['yarn test', 'yarn build'],
          // you can reference aws cdk resources into website build environment variables.
          environmentVariables: {
-            REACT_APP_TEST: { value: cloudfrontDistribution.distributionDomainName },
-            // REACT_APP_TEST: { value: 'test1' },
+            REACT_APP_TEST: { value: props?.resourceBeingDifferentWithStage },
          },
          destinationBucket: websiteS3Bucket,
          // If this value is set, all files in the distribution's edge caches will be invalidated after the deployment of build output.
