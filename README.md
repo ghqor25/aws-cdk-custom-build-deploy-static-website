@@ -17,6 +17,9 @@ Personal work, so might not work in some cases. Please aware.
 - It will automatically empty the S3 bucket before deploy the build output. Be aware of that.
 - Cloudfront Invalidation will invalidate all files in the cache. It will cost as 1 path. [Aws Doc](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#PayingForInvalidation)
 - Invalidation Stage might take long time(set timeout to 20 mins. But usually end ~ 5 mins). Because createInvalidation often fails especially when do it again in a short time.
+- Peer Dependencies (It's obvious you are using aws-cdk-lib and constructs, but I've just wrote.)
+  - "aws-cdk-lib": "^2.32.1" - If you use aws_codebuild.LinuxBuildImage.STANDARD_6_0 (which is Nodejs 16 runtime available), you should use 2.32.1 or new version.
+  - "constructs": "^10.0.9"
 
 
 ## CodePipeline Description

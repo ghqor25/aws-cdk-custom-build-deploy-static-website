@@ -5,6 +5,7 @@
   "keywords": [
     "aws",
     "cdk",
+    "cdkv2",
     "constructs",
     "codepipeline",
     "website"
