@@ -6,7 +6,7 @@ Personal work, so might not work in some cases. Please aware.
 
 ## Purpose
 
-- Make CodePipeline for frontend, triggered only by source trigger action. Enable to work independently with entire Cdk Pipeline.
+- Make CodePipeline for frontend, triggered only by source trigger action. Enable to work independently with entire Cdk Pipelines.
 - Pass environment variables referencing other aws-cdk resources to frontend when build. So can use different environment variables with each ci/cd stage.(e.g. dev, prod, ...). 
 
 
