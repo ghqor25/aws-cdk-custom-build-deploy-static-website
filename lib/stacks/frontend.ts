@@ -62,6 +62,7 @@ export class FrontendStack extends Stack {
             // REACT_APP_TEST: { value: 'test1' },
          },
          destinationBucket: websiteS3Bucket,
+         // If this value is set, all files in the distribution's edge caches will be invalidated after the deployment of build output.
          cloudfrontDistributionId: cloudfrontDistribution.distributionId,
       });
    }
