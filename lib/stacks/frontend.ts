@@ -2,8 +2,13 @@ import { aws_cloudfront, aws_cloudfront_origins, aws_codecommit, aws_s3, Duratio
 import { Construct } from 'constructs';
 import { BuildDeployStaticWebsite, BuildDeployStaticWebsiteSource } from 'src/index';
 
+interface FrontendStackProps extends StackProps {
+   // referencing resource that changes within stages
+   resourceBeingDifferentWithStage: string;
+}
+
 export class FrontendStack extends Stack {
-   constructor(scope: Construct, id: string, props?: StackProps) {
+   constructor(scope: Construct, id: string, props: FrontendStackProps) {
       super(scope, id, props);
 
       /**
@@ -58,8 +63,7 @@ export class FrontendStack extends Stack {
          buildCommands: ['yarn test', 'yarn build'],
          // you can reference aws cdk resources into website build environment variables.
          environmentVariables: {
-            REACT_APP_TEST: { value: cloudfrontDistribution.distributionDomainName },
-            // REACT_APP_TEST: { value: 'test1' },
+            REACT_APP_TEST: { value: props.resourceBeingDifferentWithStage },
          },
          destinationBucket: websiteS3Bucket,
          // If this value is set, all files in the distribution's edge caches will be invalidated after the deployment of build output.
