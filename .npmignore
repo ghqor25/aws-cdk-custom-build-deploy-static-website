@@ -38,7 +38,6 @@ test
 *.ts
 !*.d.ts
 *.tgz
-.vscode
 
 # except config
 .eslintignore
@@ -50,3 +49,4 @@ cdk.json
 jest.config.js
 tsconfig.json
 tsconfig.build.json
+.vscode
