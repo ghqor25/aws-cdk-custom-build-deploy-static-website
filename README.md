@@ -92,4 +92,11 @@ fixed some props initial value
 fixed stepfunction params problem
 
 multi stage tested
+
+## 0.0.5
+fixed readme
+
+fixed package.json (repo, keywords)
+
+fixed interval of get invalidation
 -->
