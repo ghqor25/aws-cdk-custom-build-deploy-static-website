@@ -1,15 +1,11 @@
-import { aws_iam, aws_lambda, aws_lambda_nodejs, aws_stepfunctions, aws_stepfunctions_tasks, Duration } from 'aws-cdk-lib';
+import { aws_iam, aws_lambda, aws_lambda_nodejs, aws_s3, aws_stepfunctions, aws_stepfunctions_tasks, Duration } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
 interface S3EmptyBucketProps {
    /**
-    * bucket name for delete all objects
+    * S3 bucket target.
     */
-   bucketName: string;
-   /**
-    * bucket arn for grant policy to lambda
-    */
-   bucketArn: string;
+   bucket: aws_s3.IBucket;
 }
 
 /**
@@ -28,11 +24,11 @@ export class S3EmptyBucket extends Construct {
                new aws_iam.PolicyStatement({
                   effect: aws_iam.Effect.ALLOW,
                   actions: ['s3:ListBucket'],
-                  resources: [props.bucketArn],
+                  resources: [props.bucket.bucketArn],
                }),
             ],
          }),
-         payload: { type: aws_stepfunctions.InputType.OBJECT, value: { BUCKET_NAME: props.bucketName } },
+         payload: { type: aws_stepfunctions.InputType.OBJECT, value: { BUCKET_NAME: props.bucket.bucketName } },
          outputPath: '$.Payload',
       });
 
@@ -44,7 +40,7 @@ export class S3EmptyBucket extends Construct {
                new aws_iam.PolicyStatement({
                   effect: aws_iam.Effect.ALLOW,
                   actions: ['s3:DeleteObject'],
-                  resources: [`${props.bucketArn}/*`],
+                  resources: [`${props.bucket.bucketArn}/*`],
                }),
             ],
          }),

@@ -1,4 +1,4 @@
-import { aws_codebuild, aws_codepipeline, aws_codepipeline_actions, aws_s3 } from 'aws-cdk-lib';
+import { aws_cloudfront, aws_codebuild, aws_codepipeline, aws_codepipeline_actions, aws_s3 } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { CloudfrontInvalidation } from '../cloudfront-invalidation/index';
 import { S3EmptyBucket } from '../s3-empty-bucket/index';
@@ -32,14 +32,15 @@ export interface BuildDeployStaticWebsiteProps {
     */
    readonly destinationBucket: aws_s3.IBucket;
    /**
-    * Id of distribution in Cloudfront, using ```destinationBucket``` as an origin.
+    * Cloudfront Distribution, using ```destinationBucket``` as an origin.
     *
     * If this value is set, all files in the distribution's edge caches will be invalidated after the deployment of build output.
     *
     * If not set, Invalidation Stage will be excluded from ```BuildDeployStaticWebsite``` CodePipeline
     * @default - no CloudFront invalidation.
+    * @caution cloudfrontDistributionId is removed. Please use this prop instead, just put distribution directly. It works same.
     */
-   readonly cloudfrontDistributionId?: string;
+   readonly cloudfrontDistribution?: aws_cloudfront.Distribution;
    /**
     * The directory that will contain output files.
     *
@@ -171,8 +172,7 @@ export class BuildDeployStaticWebsite extends Construct {
             new aws_codepipeline_actions.StepFunctionInvokeAction({
                actionName: 'StepFunctionInvokeAction',
                stateMachine: new S3EmptyBucket(this, 'S3EmptyBucket', {
-                  bucketArn: props.destinationBucket.bucketArn,
-                  bucketName: props.destinationBucket.bucketName,
+                  bucket: props.destinationBucket,
                }).stateMachine,
             }),
          ],
@@ -183,13 +183,13 @@ export class BuildDeployStaticWebsite extends Construct {
          actions: [new aws_codepipeline_actions.S3DeployAction({ actionName: 'S3DeployAction', input: buildOutput, bucket: props.destinationBucket })],
       });
 
-      if (props.cloudfrontDistributionId) {
+      if (props.cloudfrontDistribution) {
          pipeline.addStage({
             stageName: 'Invalidation',
             actions: [
                new aws_codepipeline_actions.StepFunctionInvokeAction({
                   actionName: 'StepFunctionInvokeAction',
-                  stateMachine: new CloudfrontInvalidation(this, 'CloudfrontInvalidation', { cloudfrontDistributionId: props.cloudfrontDistributionId })
+                  stateMachine: new CloudfrontInvalidation(this, 'CloudfrontInvalidation', { cloudfrontDistribution: props.cloudfrontDistribution })
                      .stateMachine,
                }),
             ],

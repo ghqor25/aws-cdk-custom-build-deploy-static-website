@@ -102,4 +102,9 @@ fixed readme
 fixed package.json (repo, keywords)
 
 fixed interval of get invalidation
+
+# 1.0.0 (dev)
+removed cloudfrontdistributionId, added cloudfrontDistribution. It makes to put cdk resource directly. for syntax unity.
+internal props fixed for same reason. It will not be seen to users. Just for inner syntax unity.
+
 -->
