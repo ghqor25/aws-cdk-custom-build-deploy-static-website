@@ -44,8 +44,8 @@ export class CloudfrontInvalidation extends Construct {
          resultPath: aws_stepfunctions.JsonPath.DISCARD,
       });
 
-      const wait30Secs = new aws_stepfunctions.Wait(this, 'Wait 30 Secs', {
-         time: aws_stepfunctions.WaitTime.duration(Duration.seconds(30)),
+      const wait1Mins = new aws_stepfunctions.Wait(this, 'Wait 1 Mins', {
+         time: aws_stepfunctions.WaitTime.duration(Duration.minutes(1)),
       });
 
       const lambdaCloudfrontGetInvalidation = new aws_stepfunctions_tasks.LambdaInvoke(this, 'Invoke GetInvalidation', {
@@ -68,7 +68,7 @@ export class CloudfrontInvalidation extends Construct {
          .otherwise(passGetInvalidation);
 
       this.stateMachine = new aws_stepfunctions.StateMachine(this, 'StateMachine', {
-         definition: lambdaCloudfrontCreateInvalidation.next(passGetInvalidation).next(wait30Secs).next(lambdaCloudfrontGetInvalidation).next(choiceResult),
+         definition: lambdaCloudfrontCreateInvalidation.next(passGetInvalidation).next(wait1Mins).next(lambdaCloudfrontGetInvalidation).next(choiceResult),
          timeout: Duration.minutes(20),
       });
    }
