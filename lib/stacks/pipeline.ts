@@ -45,7 +45,7 @@ export class PipelineStack extends Stack {
          synth: new pipelines.ShellStep('Synth', {
             input: pipelines.CodePipelineSource.codeCommit(
                aws_codecommit.Repository.fromRepositoryName(this, 'CodeCommit', 'aws-cdk-custom-build-deploy-static-website-pipeline'),
-               'main',
+               'dev',
             ),
             installCommands: ['yarn set version 3.2.1', 'yarn install'],
             commands: ['yarn synth'],
