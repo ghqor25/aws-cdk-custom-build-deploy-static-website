@@ -21,6 +21,7 @@
   ],
   "scripts": {
     "deploy": "cdk deploy --require-approval=never",
+    "synth": "cdk synth --quiet",
     "compile": "rm -rf ./dist && tsc --project tsconfig.build.json",
     "test": "jest",
     "prepack": "yarn compile",
