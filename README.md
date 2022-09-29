@@ -103,4 +103,9 @@ fixed readme
 fixed package.json (repo, keywords)
 
 fixed interval of get invalidation
+
+## 0.0.6
+fixed readme
+
+fixed package.json keywords
 -->

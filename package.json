@@ -1,14 +1,14 @@
 {
   "name": "@songbaek/aws-cdk-build-deploy-static-website",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "Apache-2.0",
   "keywords": [
     "aws",
     "cdk",
-    "cdkv2",
-    "constructs",
+    "aws cdk v2",
+    "custom constructs",
     "codepipeline",
-    "website"
+    "static website"
   ],
   "repository": {
     "type": "git",
