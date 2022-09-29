@@ -48,7 +48,7 @@ export class PipelineStack extends Stack {
                'dev',
             ),
             installCommands: ['yarn set version 3.2.1', 'yarn install'],
-            commands: ['yarn cdk synth --quiet'],
+            commands: ['yarn synth'],
             primaryOutputDirectory: 'cdk.out',
          }),
          publishAssetsInParallel: true,
