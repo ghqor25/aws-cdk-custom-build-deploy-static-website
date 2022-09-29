@@ -2,7 +2,8 @@
 
 Custom Aws Cdk CodePipeline made for build, deploy, cloudfront invalidation(optional) for static websites.
 
-Personal work, so might not work in some cases. Please aware.
+Multi stage pipeline(using aws-cdk-lib.pipelines) example code is in github repo.
+
 
 ## Purpose
 
