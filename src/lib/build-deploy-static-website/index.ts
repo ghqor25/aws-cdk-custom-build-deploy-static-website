@@ -141,6 +141,7 @@ export class BuildDeployStaticWebsite extends Construct {
       });
 
       const pipeline = new aws_codepipeline.Pipeline(this, 'Pipeline', {
+         restartExecutionOnUpdate: false,
          crossAccountKeys: props.crossAccountKeys ?? false,
          enableKeyRotation: props.enableKeyRotation ?? false,
       });
