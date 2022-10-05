@@ -108,4 +108,7 @@ fixed interval of get invalidation
 fixed readme
 
 fixed package.json keywords
+
+## 0.0.7
+fixed pipeline artifact with auto delete
 -->

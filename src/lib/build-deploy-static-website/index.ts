@@ -1,4 +1,4 @@
-import { aws_codebuild, aws_codepipeline, aws_codepipeline_actions, aws_s3 } from 'aws-cdk-lib';
+import { aws_codebuild, aws_codepipeline, aws_codepipeline_actions, aws_s3, RemovalPolicy } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { CloudfrontInvalidation } from '../cloudfront-invalidation/index';
 import { S3EmptyBucket } from '../s3-empty-bucket/index';
@@ -142,6 +142,13 @@ export class BuildDeployStaticWebsite extends Construct {
       const pipeline = new aws_codepipeline.Pipeline(this, 'Pipeline', {
          crossAccountKeys: props.crossAccountKeys ?? false,
          enableKeyRotation: props.enableKeyRotation ?? false,
+         restartExecutionOnUpdate: false,
+         artifactBucket: new aws_s3.Bucket(this, 'PipelineArtifact', {
+            blockPublicAccess: aws_s3.BlockPublicAccess.BLOCK_ALL,
+            publicReadAccess: false,
+            autoDeleteObjects: true,
+            removalPolicy: RemovalPolicy.DESTROY,
+         }),
       });
 
       pipeline.addStage({
