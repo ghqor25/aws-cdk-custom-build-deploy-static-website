@@ -6,7 +6,7 @@ interface CloudfrontInvalidationProps {
     * The CloudFront distribution.
     * Files in the distribution's edge caches will be invalidated.
     */
-   readonly cloudfrontDistribution: aws_cloudfront.Distribution;
+   readonly cloudfrontDistribution: aws_cloudfront.IDistribution;
 }
 
 /**

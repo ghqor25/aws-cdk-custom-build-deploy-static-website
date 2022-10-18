@@ -38,9 +38,8 @@ export interface BuildDeployStaticWebsiteProps {
     *
     * If not set, Invalidation Stage will be excluded from ```BuildDeployStaticWebsite``` CodePipeline
     * @default - no CloudFront invalidation.
-    * @caution cloudfrontDistributionId is removed. Please use this prop instead, just put distribution directly. It works same.
     */
-   readonly cloudfrontDistribution?: aws_cloudfront.Distribution;
+   readonly cloudfrontDistribution?: aws_cloudfront.IDistribution;
    /**
     * The directory that will contain output files.
     *
