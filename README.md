@@ -4,7 +4,6 @@ Custom Aws Cdk CodePipeline made for build, deploy, cloudfront invalidation(opti
 
 Multi stage pipeline(using aws-cdk-lib.pipelines) example code is in github repo.
 
-
 ## Purpose
 
 - Make CodePipeline for frontend, triggered only by source trigger action. Enable to work independently with entire Cdk Pipelines.
@@ -38,9 +37,9 @@ Invalidation (optional)   | If you are using Cloudfront, cache invalidation will
 
 ```typescript
 // destination bucket where to put static website build
-declare websiteS3Bucket: aws_s3.Bucket;
+declare websiteS3Bucket: aws_s3.IBucket;
 // cloudfront distribution using websiteS3Bucket as an origin.
-declare cloudfrontDistribution: aws_cloudfront.Distribution;
+declare cloudfrontDistribution: aws_cloudfront.IDistribution;
 
 // this is where to use BuildDeployStaticWebsite
 new BuildDeployStaticWebsite(this, 'PipelineFrontend', {
@@ -68,7 +67,7 @@ new BuildDeployStaticWebsite(this, 'PipelineFrontend', {
     // bucket files will be all cleaned up before deployment.
     destinationBucket: websiteS3Bucket,
     // If this value is set, all files in the distribution's edge caches will be invalidated after the deployment of build output.
-    cloudfrontDistributionId: cloudfrontDistribution.distributionId,
+    cloudfrontDistribution: cloudfrontDistribution,
     /** there is some optional props more. */
 });
 ```
@@ -111,4 +110,9 @@ fixed package.json keywords
 
 ## 0.0.7
 fixed pipeline artifact with auto delete
+
+## 1.0.0 
+removed cloudfrontdistributionId, added cloudfrontDistribution. It makes to put cdk resource directly. for syntax unity.
+internal props fixed for same reason. It will not be seen to users. Just for inner syntax unity.
+
 -->

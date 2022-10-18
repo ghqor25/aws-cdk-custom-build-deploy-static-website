@@ -8,7 +8,7 @@ interface FrontendStackProps extends StackProps {
 }
 
 export class FrontendStack extends Stack {
-   constructor(scope: Construct, id: string, props?: FrontendStackProps) {
+   constructor(scope: Construct, id: string, props: FrontendStackProps) {
       super(scope, id, props);
 
       /**
@@ -59,15 +59,15 @@ export class FrontendStack extends Stack {
          //    repository: aws_codecommit.Repository.fromRepositoryName(this, 'CodeCommit', 'aws-cdk-custom-build-deploy-static-website-frontend'),
          //    branch: 'main',
          // }),
-         installCommands: ['yarn set version stable', 'yarn install'],
+         installCommands: ['yarn set version 3.2.1', 'yarn install'],
          buildCommands: ['yarn test', 'yarn build'],
          // you can reference aws cdk resources into website build environment variables.
          environmentVariables: {
-            REACT_APP_TEST: { value: props?.resourceBeingDifferentWithStage },
+            REACT_APP_TEST: { value: props.resourceBeingDifferentWithStage },
          },
          destinationBucket: websiteS3Bucket,
          // If this value is set, all files in the distribution's edge caches will be invalidated after the deployment of build output.
-         cloudfrontDistributionId: cloudfrontDistribution.distributionId,
+         cloudfrontDistribution: cloudfrontDistribution,
       });
    }
 }

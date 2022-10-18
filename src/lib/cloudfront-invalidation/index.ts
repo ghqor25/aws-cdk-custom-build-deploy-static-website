@@ -1,12 +1,12 @@
-import { aws_iam, aws_lambda, aws_lambda_nodejs, aws_stepfunctions, aws_stepfunctions_tasks, Duration, Stack } from 'aws-cdk-lib';
+import { aws_cloudfront, aws_iam, aws_lambda, aws_lambda_nodejs, aws_stepfunctions, aws_stepfunctions_tasks, Duration, Stack } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
 interface CloudfrontInvalidationProps {
    /**
-    * The CloudFront distribution Id.
+    * The CloudFront distribution.
     * Files in the distribution's edge caches will be invalidated.
     */
-   readonly cloudfrontDistributionId: string;
+   readonly cloudfrontDistribution: aws_cloudfront.IDistribution;
 }
 
 /**
@@ -29,12 +29,12 @@ export class CloudfrontInvalidation extends Construct {
                new aws_iam.PolicyStatement({
                   effect: aws_iam.Effect.ALLOW,
                   actions: ['cloudfront:CreateInvalidation'],
-                  resources: [getCloudfrontDistributionArn(Stack.of(this).account, props.cloudfrontDistributionId)],
+                  resources: [getCloudfrontDistributionArn(Stack.of(this).account, props.cloudfrontDistribution.distributionId)],
                }),
             ],
             retryAttempts: 0,
          }),
-         payload: { type: aws_stepfunctions.InputType.OBJECT, value: { DISTRIBUTION_ID: props.cloudfrontDistributionId } },
+         payload: { type: aws_stepfunctions.InputType.OBJECT, value: { DISTRIBUTION_ID: props.cloudfrontDistribution.distributionId } },
          retryOnServiceExceptions: false,
          outputPath: '$.Payload',
       });
@@ -56,7 +56,7 @@ export class CloudfrontInvalidation extends Construct {
                new aws_iam.PolicyStatement({
                   effect: aws_iam.Effect.ALLOW,
                   actions: ['cloudfront:GetInvalidation'],
-                  resources: [getCloudfrontDistributionArn(Stack.of(this).account, props.cloudfrontDistributionId)],
+                  resources: [getCloudfrontDistributionArn(Stack.of(this).account, props.cloudfrontDistribution.distributionId)],
                }),
             ],
          }),
